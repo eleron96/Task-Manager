@@ -6,6 +6,7 @@ def index(request):
         'who': 'World',
     })
 
+
 def home(request):
     return render(request, 'home.html', context={
         'who': 'World',
