@@ -9,11 +9,11 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
 from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
 import os
+from django.utils.translation import gettext_lazy
 
 load_dotenv()
 
@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'task_manager.urls'
@@ -112,9 +113,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+LANGUAGES = (
+    ('en-us', gettext_lazy('English')),
+    ('ru', gettext_lazy('Russian')),
+)
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+LOCALE_PATHS = [BASE_DIR / 'locale/']
 
 USE_TZ = True
 
