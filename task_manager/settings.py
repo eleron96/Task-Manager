@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'task_manager',
+    'crispy_forms',
+    'crispy_bootstrap4',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -57,6 +60,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'task_manager.urls'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
 TEMPLATES = [
     {
@@ -111,17 +116,20 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 LANGUAGES = (
     ('en-us', gettext_lazy('English')),
     ('ru', gettext_lazy('Russian')),
+    ('en', 'English'),
+    ('ru', 'Russian'),
 )
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 LOCALE_PATHS = [BASE_DIR / 'locale/']
+LOGIN_REDIRECT_URL = 'login'
 
 USE_TZ = True
 
