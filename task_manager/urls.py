@@ -16,6 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+
+from status.views import status_task, create_status, edit_status, delete_status
+from labels.views import label, create_label, edit_label, delete_label
 from task_manager import views
 from django.contrib.auth.views import LoginView, LogoutView
 
@@ -27,7 +30,15 @@ urlpatterns = [
     path('users/', views.user_list, name='user_list'),
     path('users/<int:id>/', views.user_detail, name='user_detail'),
     path('users/edit/<int:id>/', views.edit_user, name='edit_user'),
-    path('users/delete/<int:pk>/', views.delete_user, name='delete_user'),
+    path('users/delete/<int:id>/', views.delete_user, name='delete_user'),
     path('users/create/', views.create_user, name='create_user'),
+    path('statuses/', status_task, name='status_task'),
+    path('statuses/create/', create_status, name='create_status'),
+    path('status/edit/<int:status_id>/', edit_status, name='edit_status'),
+    path('status/delete/<int:status_id>/', delete_status, name='delete_status'),
+    path('labels/', label, name='label'),
+    path('labels/create/', create_label, name='create_label'),
+    path('labels/edit/<int:status_id>/', edit_label, name='edit_label'),
+    path('labels/delete/<int:status_id>/', delete_label, name='delete_label'),
 
 ]

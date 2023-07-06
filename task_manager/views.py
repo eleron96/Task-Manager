@@ -1,12 +1,12 @@
 from audioop import reverse
 
 from django.contrib import messages
-from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
-from .forms import CustomPasswordChangeForm, UserEditForm, CreateUserForm, \
+from .forms import UserEditForm, CreateUserForm, \
     UserPasswordChangeForm
 
 
@@ -49,7 +49,7 @@ def edit_user(request, id):
     # Убедимся, что вошедший пользователь пытается редактировать свой профиль
     if request.user != user:
         messages.error(request, 'У вас нет прав для изменения другого '
-                                'пользователя.')
+                                'пользователя.', extra_tags='danger')
         return redirect('user_list')
 
     if request.method == 'POST':
@@ -58,13 +58,13 @@ def edit_user(request, id):
 
         if user_form.is_valid():
             user_form.save()
-            messages.success(request, 'Your profile was successfully updated!')
+            messages.success(request, 'Ваш профиль успешно обновлен!')
 
             # Проверяем, заполнены ли поля пароля
             if password_form.has_changed() and password_form.is_valid():
                 password_form.save()
                 messages.success(request,
-                                 'Your password was successfully updated!')
+                                 'Ваш профиль успешно обновлен!')
 
             return redirect('user_list')
     else:
@@ -90,19 +90,22 @@ def login_view(request):
                 login(request, user)
                 messages.success(request, 'Вы успешно вошли в систему.',
                                  extra_tags='success')
-                return redirect('home')
+                if 'next' in request.POST:
+                    return redirect(request.POST.get('next'))
+                else:
+                    return redirect('home')
             else:
-                messages.add_message(request, messages.ERROR,
-                                     'Пожалуйста, введите правильные имя '
-                                     'пользователя и пароль. Оба поля '
-                                     'могут быть чувствительны к регистру.',
-                                     extra_tags='danger')
-
+                messages.error(request, 'Пожалуйста, введите правильные имя '
+                                 'пользователя и пароль. Оба поля '
+                                 'могут быть чувствительны к регистру.',
+                                extra_tags='danger')
         else:
             for msg in form.non_field_errors():
                 messages.error(request, msg)
     else:
         form = AuthenticationForm()
+        if 'next' in request.GET:
+            messages.error(request, 'Пожалуйста, войдите, чтобы продолжить.', extra_tags='danger')
     return render(request, 'registration/login.html', {'form': form})
 
 
@@ -114,8 +117,12 @@ def logout_view(request):
 
 
 @login_required
-def delete_user(request, pk):
-    user = get_object_or_404(User, pk=pk)
+def delete_user(request, id):
+    user = User.objects.get(id=id)
+    if request.user != user:
+        messages.error(request, 'У вас нет прав для изменения другого '
+                                'пользователя.')
+        return redirect('user_list')
     if request.method == 'POST':
         user.delete()
         messages.success(request, 'Пользователь успешно удален.')

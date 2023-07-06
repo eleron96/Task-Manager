@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'task_manager',
+    'status',
+    'labels',
     'crispy_forms',
     'crispy_bootstrap4',
     'bootstrap4',
@@ -63,7 +65,8 @@ ROOT_URLCONF = 'task_manager.urls'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
-
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
 
 TEMPLATES = [
     {

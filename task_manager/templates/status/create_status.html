@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Создать статус" %}{% endblock %}
+
+{% block content %}
+<h2>{% trans "Создать статус" %}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">{% trans "Сохранить" %}</button>
+  </form>
+{% endblock %}
