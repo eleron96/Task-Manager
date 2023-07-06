@@ -62,6 +62,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'task_manager.urls'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
 
 TEMPLATES = [
     {
@@ -116,13 +118,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'ru'
 
 LANGUAGES = (
-    ('en-us', gettext_lazy('English')),
-    ('ru', gettext_lazy('Russian')),
-    ('en', 'English'),
     ('ru', 'Russian'),
+    ('en', 'English'),
 )
 
 TIME_ZONE = 'UTC'

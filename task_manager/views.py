@@ -1,10 +1,13 @@
+from audioop import reverse
+
 from django.contrib import messages
-from django.contrib.auth import authenticate, get_user_model, login
+from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
-from .forms import CustomPasswordChangeForm, UserEditForm
+from .forms import CustomPasswordChangeForm, UserEditForm, CreateUserForm, \
+    UserPasswordChangeForm
 
 
 def index(request):
@@ -29,39 +32,51 @@ def user_list(request):
 
 def create_user(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CreateUserForm(request.POST)  # Используйте CreateUserForm
         if form.is_valid():
             form.save()
-            return redirect('user_list')
+            messages.success(request, 'Пользователь успешно создан.')
+            return redirect('login')  # redirect to login page
     else:
-        form = UserCreationForm()
+        form = CreateUserForm()  # Используйте CreateUserForm
     return render(request, 'users/create_user.html', {'form': form})
 
 
 @login_required
 def edit_user(request, id):
-    User = get_user_model()
     user = User.objects.get(id=id)
 
-    # Ensure the logged in user is the one trying to edit their profile
+    # Убедимся, что вошедший пользователь пытается редактировать свой профиль
     if request.user != user:
-        messages.error(request, 'You are not allowed to edit this user.')
-        return redirect('home')
+        messages.error(request, 'У вас нет прав для изменения другого '
+                                'пользователя.')
+        return redirect('user_list')
 
     if request.method == 'POST':
-        u_form = UserEditForm(request.POST, instance=user)
-        p_form = CustomPasswordChangeForm(user, request.POST)
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request, 'Your profile was successfully updated!')
-            return redirect('home')
-    else:
-        u_form = UserEditForm(instance=user)
-        p_form = CustomPasswordChangeForm(user)
+        user_form = UserEditForm(request.POST, instance=user)
+        password_form = UserPasswordChangeForm(user, request.POST)
 
-    return render(request, 'users/edit_user.html',
-                  {'u_form': u_form, 'p_form': p_form})
+        if user_form.is_valid():
+            user_form.save()
+            messages.success(request, 'Your profile was successfully updated!')
+
+            # Проверяем, заполнены ли поля пароля
+            if password_form.has_changed() and password_form.is_valid():
+                password_form.save()
+                messages.success(request,
+                                 'Your password was successfully updated!')
+
+            return redirect('user_list')
+    else:
+        user_form = UserEditForm(instance=user)
+        password_form = UserPasswordChangeForm(user)
+
+    context = {
+        'user_form': user_form,
+        'password_form': password_form,
+    }
+
+    return render(request, 'users/edit_user.html', context)
 
 
 def login_view(request):
@@ -73,14 +88,37 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
+                messages.success(request, 'Вы успешно вошли в систему.',
+                                 extra_tags='success')
                 return redirect('home')
+            else:
+                messages.add_message(request, messages.ERROR,
+                                     'Пожалуйста, введите правильные имя '
+                                     'пользователя и пароль. Оба поля '
+                                     'могут быть чувствительны к регистру.',
+                                     extra_tags='danger')
+
+        else:
+            for msg in form.non_field_errors():
+                messages.error(request, msg)
     else:
         form = AuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})
 
-def delete_user(request, id):
-    user = get_object_or_404(User, id=id)
+
+
+def logout_view(request):
+    logout(request)
+    messages.info(request, 'Вы разлогинены')
+    return redirect('home')
+
+
+@login_required
+def delete_user(request, pk):
+    user = get_object_or_404(User, pk=pk)
     if request.method == 'POST':
         user.delete()
-        return redirect('task_manager:user_list')
-    return render(request, 'confirm_delete.html', {'object': user})
+        messages.success(request, 'Пользователь успешно удален.')
+        return redirect('user_list')
+    else:
+        return render(request, 'users/confirm_delete.html', {'user': user})

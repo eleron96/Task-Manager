@@ -1,16 +1,19 @@
 {% extends "base.html" %}
-
-{% block title %}Users{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Users" %}{% endblock %}
 
 {% block content %}
-  <h2>Users</h2>
+  <h2>{% trans "Users" %}</h2>
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Username</th>
+        <th scope="col">id</th>
+        <th scope="col">Имя пользователя</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Фамилия</th>
         <th scope="col">Email</th>
-        <th scope="col">Actions</th>
+        <th scope="col">Дата создания</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -18,16 +21,19 @@
         <tr>
           <th scope="row">{{ user.id }}</th>
           <td>{{ user.username }}</td>
+          <td>{{ user.first_name }}</td>
+          <td>{{ user.last_name }}</td>
           <td>{{ user.email }}</td>
+          <td>{{ user.date_joined|date:"d.m.Y H:i" }}</td>
           <td>
-            <a href="{% url 'edit_user' user.id %}">Edit</a>
+            <a href="{% url 'edit_user' user.id %}">{% trans "Edit" %}</a>
             <br>
-            <a href="{% url 'delete_user' user.id %}">Delete</a>
+            <a href="{% url 'delete_user' user.id %}">{% trans "Delete" %}</a>
           </td>
         </tr>
       {% empty %}
         <tr>
-          <td colspan="4">No users found</td>
+          <td colspan="7">{% trans "No users found" %}</td>
         </tr>
       {% endfor %}
     </tbody>

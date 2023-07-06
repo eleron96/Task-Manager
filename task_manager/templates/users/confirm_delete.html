@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>Are you sure you want to delete {{ object.username }}?</h2>
-  <form method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Yes, delete</button>
-    <a href="{% url 'task_manager:user_list' %}" class="btn btn-secondary">No, go back</a>
-  </form>
+<h2>Удаление пользователя</h2>
+<p>Вы уверены, что хотите удалить {{ user.username }}?</p>
+<form method="post">
+  {% csrf_token %}
+  <input type="submit" value="Да, удалить" class="btn btn-danger">
+  <a href="{% url 'home' %}" class="btn btn-secondary">Нет, вернуться назад</a>
+</form>
 {% endblock %}
