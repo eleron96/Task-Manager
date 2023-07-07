@@ -22,6 +22,10 @@ from labels.views import label, create_label, edit_label, delete_label
 from task_manager import views
 from django.contrib.auth.views import LoginView, LogoutView
 
+
+from tasks.views import edit_tasks, delete_tasks, tasks, tasks_list, \
+    create_tasks
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
@@ -40,5 +44,9 @@ urlpatterns = [
     path('labels/create/', create_label, name='create_label'),
     path('labels/edit/<int:status_id>/', edit_label, name='edit_label'),
     path('labels/delete/<int:status_id>/', delete_label, name='delete_label'),
+    path('tasks/', tasks_list, name='tasks'),
+    path('tasks/create/', create_tasks, name='create_tasks'),
+    path('tasks/edit/<int:task_id>/', edit_tasks, name='edit_tasks'),
+    path('tasks/delete/<int:task_id>/', delete_tasks, name='delete_tasks'),
 
 ]

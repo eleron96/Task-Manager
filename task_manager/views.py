@@ -97,8 +97,7 @@ def login_view(request):
             else:
                 messages.error(request, 'Пожалуйста, введите правильные имя '
                                  'пользователя и пароль. Оба поля '
-                                 'могут быть чувствительны к регистру.',
-                                extra_tags='danger')
+                                 'могут быть чувствительны к регистру.', extra_tags='danger')
         else:
             for msg in form.non_field_errors():
                 messages.error(request, msg)

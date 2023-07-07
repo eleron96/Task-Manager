@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'task_manager',
     'status',
     'labels',
+    'tasks',
     'crispy_forms',
     'crispy_bootstrap4',
     'bootstrap4',
