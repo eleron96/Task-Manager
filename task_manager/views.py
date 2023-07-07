@@ -1,5 +1,3 @@
-from audioop import reverse
-
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -24,11 +22,6 @@ def index(request):
 def home(request):
     users = User.objects.all()
     return render(request, 'home.html', {'users': users})
-
-
-def user_detail(request, id):
-    user = get_object_or_404(User, pk=id)
-    return render(request, 'user_detail.html', {'user': user})
 
 
 def user_list(request):

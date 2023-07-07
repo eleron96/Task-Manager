@@ -9,3 +9,10 @@ translate:
 	@echo "Translating..."
 	@poetry run python manage.py makemessages -l ru
 	@poetry run python manage.py compilemessages
+
+
+test:
+	poetry run coverage run --source=app,labels,status,task_manager,tasks -m pytest
+
+report:
+	poetry run coverage report -m --omit=venv/*

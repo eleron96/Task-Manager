@@ -33,7 +33,6 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('users/', views.user_list, name='user_list'),
-    path('users/<int:id>/', views.user_detail, name='user_detail'),
     path('users/edit/<int:id>/', views.edit_user, name='edit_user'),
     path('users/delete/<int:id>/', views.delete_user, name='delete_user'),
     path('users/create/', views.create_user, name='create_user'),
