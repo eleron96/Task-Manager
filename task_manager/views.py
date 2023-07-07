@@ -8,7 +8,13 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import UserEditForm, CreateUserForm, \
     UserPasswordChangeForm
+from django.shortcuts import render
+from django.http import HttpResponse
 
+def index(request):
+    a = None
+    a.hello() # Creating an error with an invalid line of code
+    return HttpResponse("Hello, world. You're at the pollapp index.")
 
 def index(request):
     users = User.objects.all()
