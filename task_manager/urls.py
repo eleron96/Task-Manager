@@ -21,12 +21,14 @@ from status.views import status_task, create_status, edit_status, delete_status
 from labels.views import label, create_label, edit_label, delete_label
 from task_manager import views
 from django.contrib.auth.views import LoginView, LogoutView
+from .views import index
 
 
 from tasks.views import edit_tasks, delete_tasks, tasks, tasks_list, \
     create_tasks
 
 urlpatterns = [
+    path('index/', index, name='index'),
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('login/', views.login_view, name='login'),
