@@ -16,8 +16,16 @@ class TaskForm(forms.ModelForm):
         model = Task
         fields = ['name', 'description', 'status', 'executor', 'label']
 
+    def clean_status(self):
+        status = self.cleaned_data.get('status')
+        if status:
+            return Status.objects.get(id=status.id)  # or status.id if status is an instance
+        return status
+
 
 class TaskFilterForm(forms.Form):
     status = forms.ModelChoiceField(queryset=Status.objects.all(), required=False)
     executor = forms.ModelChoiceField(queryset=User.objects.all(), required=False)
     label = forms.ModelChoiceField(queryset=labels.objects.all(), required=False)
+
+

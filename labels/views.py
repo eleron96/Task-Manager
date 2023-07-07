@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from labels.models import labels
 from labels.forms import labelsForm
 from django.contrib import messages
+from tasks.models import Task
 
 @login_required
 def label(request):
@@ -33,13 +34,18 @@ def edit_label(request, status_id):
 
     return render(request, 'edit_labels.html', {'status': status})
 @login_required
-def delete_label(request, status_id):
-    status = labels.objects.get(pk=status_id)
+def delete_label(request, label_id):  # использовать label_id вместо status_id
+    label = get_object_or_404(labels, id=label_id)
     if request.method == 'POST':
-        status.delete()
+        if not Task.objects.filter(label=label).exists(): # проверить, используется ли метка в задачах
+            label.delete()
+            messages.success(request, 'Метка успешно удалена!')
+        else:
+            messages.error(request, 'Метка не может быть удалена, так как она используется в задаче.')
         return redirect('label')
 
-    return render(request, 'labels/confirm_delete.html', {'status': status})
+    return render(request, 'labels/confirm_delete.html', {'status': label})
+
 
 @login_required
 def edit_label(request, status_id):
