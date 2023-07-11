@@ -87,7 +87,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, 'Вы успешно вошли в систему.',
+                messages.success(request, 'Вы залогинены',
                                  extra_tags='success')
                 if 'next' in request.POST:
                     return redirect(request.POST.get('next'))

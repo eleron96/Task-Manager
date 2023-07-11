@@ -1,20 +1,19 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+
+from status.models import Status
 from tasks.models import Task as TaskModel
 from tasks.forms import TaskForm, TaskFilterForm
 from django.contrib import messages
 
-@login_required
-def tasks_list(request):
-    tasks = TaskModel.objects.all()
-    return render(request, 'tasks/tasks.html', {'tasks': tasks})
 
 @login_required
 def create_tasks(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
-            task = form.save(commit=False)  # Save the form, but don't commit to the database yet
+            task = form.save(
+                commit=False)  # Save the form, but don't commit to the database yet
             task.author = request.user  # Set the author to the currently logged-in user
             task.status = form.cleaned_data['status']
             task.executor = form.cleaned_data['executor']
@@ -27,7 +26,6 @@ def create_tasks(request):
     return render(request, 'tasks/create_tasks.html', {'form': form})
 
 
-
 @login_required
 def task(request, task_id):
     task = TaskModel.objects.get(pk=task_id)
@@ -38,6 +36,7 @@ def task(request, task_id):
         return redirect('tasks')
 
     return render(request, 'edit_task.html', {'task': task})
+
 
 @login_required
 def delete_tasks(request, task_id):
@@ -74,13 +73,15 @@ def edit_tasks(request, task_id):
     else:
         form = TaskForm(instance=task)
 
-    return render(request, 'tasks/edit_tasks.html', {'form': form, 'task': task})
+    return render(request, 'tasks/edit_tasks.html',
+                  {'form': form, 'task': task})
 
 
 @login_required
-def tasks(request):
+def tasks_list(request):
     form = TaskFilterForm(request.GET or None)
     tasks = TaskModel.objects.all()
+    statuses = Status.objects.all()
     if form.is_valid():
         if form.cleaned_data['status']:
             tasks = tasks.filter(status=form.cleaned_data['status'])
@@ -88,5 +89,9 @@ def tasks(request):
             tasks = tasks.filter(executor=form.cleaned_data['executor'])
         if form.cleaned_data['label']:
             tasks = tasks.filter(label=form.cleaned_data['label'])
-    context = {'form': form, 'tasks': tasks}
+        if form.cleaned_data['my_tasks']:  # Check if 'my_tasks' is checked
+            tasks = tasks.filter(
+                author=request.user)
+    context = {'form': form, 'tasks': tasks,
+               'task_statuses': map(lambda x: x.name, statuses)}
     return render(request, 'tasks/tasks.html', context)

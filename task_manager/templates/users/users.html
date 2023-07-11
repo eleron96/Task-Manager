@@ -11,7 +11,6 @@
         <th scope="col">id</th>
         <th scope="col">Имя пользователя</th>
         <th scope="col">Полное имя</th>
-        <th scope="col">Email</th>
         <th scope="col">Дата создания</th>
         <th scope="col"></th>
       </tr>
@@ -22,10 +21,9 @@
           <th scope="row">{{ user.id }}</th>
           <td>{{ user.username }}</td>
           <td>{{ user.first_name }} {{ user.last_name }}</td>
-          <td>{{ user.email }}</td>
           <td>{{ user.date_joined|date:"d.m.Y H:i" }}</td>
           <td>
-            <a href="{% url 'edit_user' user.id %}">{% trans "Edit" %}</a>
+            <a href="{% url 'edit_user' user.id %}">Изменить</a>
             <br>
             <a href="{% url 'delete_user' user.id %}">{% trans "Delete" %}</a>
           </td>

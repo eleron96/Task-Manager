@@ -1,5 +1,12 @@
+{% load bootstrap4 %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru-ru">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" rel="stylesheet">
+    <script crossorigin="anonymous" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,4 +14,73 @@
 <body>
     <h1>Hello, {{ who }}!</h1>
 </body>
+
+
+
+<form class="form-inline">
+    <div class="form-row align-items-center">
+
+            <div class="col-sm">
+              <label class="form-label" for="id_status">Статус</label>
+            </div>
+
+            <div class="col-sm">
+                <select name="status" class="form-select rounded" id="id_status">
+                    <option value="" selected>---------</option>
+                    {% for status_name in task_statuses %}
+                        <option>{{ status_name }}</option>
+                    {% empty %}
+                        <option>Нет данных</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-sm">
+                <label class="form-label" for="id_executor">Исполнитель</label>
+            </div>
+
+            <div class="col-sm">
+              <select name="executor" class="form-select rounded" id="id_executor">
+                <option value="" selected>---------</option>
+                {% for user in form.executor.field.queryset %}
+                  <option value="{{ user.id }}">{{ user.username }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="col-sm">
+              <label class="form-label" for="id_label">Метка</label>
+            </div>
+
+            <div class="col-sm">
+              <select name="label" class="form-select rounded" id="id_label">
+                <option value="" selected>---------</option>
+                {% for label in form.label.field.queryset %}
+                  <option value="{{ label.id }}">{{ label.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="form-check">
+                <form method="GET">
+                    {{ filter.form.as_p }}
+                    <input type="checkbox" id="my_tasks" name="my_tasks">
+                    <label for="my_tasks">Только свои задачи</label>
+                </form>
+            </div>
+
+            <div class="col-sm">
+              <input class="btn btn-primary btn-sm" type="submit" value="Показать">
+            </div>
+    </div>
+
+</form>
+
+
+
+
+
+
+
+
 </html>
