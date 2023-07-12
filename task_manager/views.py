@@ -34,7 +34,7 @@ def create_user(request):
         form = CreateUserForm(request.POST)  # Используйте CreateUserForm
         if form.is_valid():
             form.save()
-            messages.success(request, 'Пользователь успешно создан.')
+            messages.success(request, 'Пользователь успешно зарегистрирован')
             return redirect('login')  # redirect to login page
     else:
         form = CreateUserForm()  # Используйте CreateUserForm
