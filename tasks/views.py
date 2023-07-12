@@ -84,14 +84,14 @@ def tasks_list(request):
     statuses = Status.objects.all()
     if form.is_valid():
         if form.cleaned_data['status']:
-            tasks = tasks.filter(status=form.cleaned_data['status'])
+            tasks = tasks.filter(status=form.cleaned_data['status'].id)
         if form.cleaned_data['executor']:
-            tasks = tasks.filter(executor=form.cleaned_data['executor'])
+            tasks = tasks.filter(executor=form.cleaned_data['executor'].id)
         if form.cleaned_data['label']:
-            tasks = tasks.filter(label=form.cleaned_data['label'])
+            tasks = tasks.filter(label=form.cleaned_data['label'].id)
         if form.cleaned_data['my_tasks']:  # Check if 'my_tasks' is checked
             tasks = tasks.filter(
                 author=request.user)
     context = {'form': form, 'tasks': tasks,
-               'task_statuses': map(lambda x: x.name, statuses)}
+               'task_statuses': statuses}
     return render(request, 'tasks/tasks.html', context)

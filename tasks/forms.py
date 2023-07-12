@@ -27,5 +27,5 @@ class TaskFilterForm(forms.Form):
     status = forms.ModelChoiceField(queryset=Status.objects.all(), required=False)
     executor = forms.ModelChoiceField(queryset=User.objects.all(), required=False)
     label = forms.ModelChoiceField(queryset=labels.objects.all(), required=False)
-
+    my_tasks = forms.BooleanField(required=False)
 

@@ -15,8 +15,8 @@
                 <label class="form-label" for="id_status">Статус</label>
                 <select name="status" class="form-select rounded" id="id_status">
                     <option value="" selected>---------</option>
-                    {% for status_name in task_statuses %}
-                        <option value="{{ status_name }}">{{ status_name }}</option>
+                    {% for status in task_statuses %}
+                        <option value="{{ status.id }}">{{ status.name }}</option>
                     {% empty %}
                         <option>Нет данных</option>
                     {% endfor %}
