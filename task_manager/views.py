@@ -115,8 +115,8 @@ def logout_view(request):
 
 
 @login_required
-def delete_user(request, id):
-    user = User.objects.get(id=id)
+def delete_user(request, pk):
+    user = User.objects.get(pk=pk)
     if request.user != user:
         messages.error(request, 'У вас нет прав для изменения другого '
                                 'пользователя.')
