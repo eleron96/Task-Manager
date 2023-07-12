@@ -51,10 +51,10 @@ def edit_user(request, pk):
                                 'пользователя.', extra_tags='danger')
         return redirect('user_list')
 
+    password_form = UserPasswordChangeForm(user, request.POST or None)
+
     if request.method == 'POST':
         user_form = UserEditForm(request.POST, instance=user)
-        password_form = UserPasswordChangeForm(user, request.POST)
-
         if user_form.is_valid():
             user_form.save()
             messages.success(request, 'Ваш профиль успешно обновлен!')
@@ -68,7 +68,6 @@ def edit_user(request, pk):
             return redirect('user_list')
     else:
         user_form = UserEditForm(instance=user)
-        password_form = UserPasswordChangeForm(user)
 
     context = {
         'user_form': user_form,
@@ -76,6 +75,7 @@ def edit_user(request, pk):
     }
 
     return render(request, 'users/edit_user.html', context)
+
 
 
 def login_view(request):
