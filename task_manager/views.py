@@ -34,7 +34,7 @@ def create_user(request):
         form = CreateUserForm(request.POST)  # Используйте CreateUserForm
         if form.is_valid():
             form.save()
-            messages.success(request, 'Пользователь успешно зарегистрирован')
+            messages.success(request, 'Пользователь успешно создан.')
             return redirect('login')  # redirect to login page
     else:
         form = CreateUserForm()  # Используйте CreateUserForm
@@ -42,8 +42,8 @@ def create_user(request):
 
 
 @login_required
-def edit_user(request, id):
-    user = User.objects.get(id=id)
+def edit_user(request, pk):
+    user = User.objects.get(pk=pk)
 
     # Убедимся, что вошедший пользователь пытается редактировать свой профиль
     if request.user != user:
