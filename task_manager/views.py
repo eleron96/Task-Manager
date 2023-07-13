@@ -2,14 +2,12 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, \
     password_validation, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import UserEditForm, CreateUserForm, \
     UserPasswordChangeForm
-from django.shortcuts import render
 from django.http import HttpResponse
-from django import forms
 
 
 
@@ -48,42 +46,42 @@ def create_user(request):
 @login_required
 def edit_user(request, pk):
     user = get_object_or_404(User, pk=pk)
-
-    # Make sure the logged in user is trying to edit their own profile
     if request.user != user:
         messages.error(request, 'У вас нет прав для изменения другого '
                                 'пользователя.', extra_tags='danger')
         return redirect('user_list')
 
+    user_form = UserEditForm(request.POST or None, instance=user)
+    password_form = UserPasswordChangeForm(user, request.POST or None)
+
     if request.method == 'POST':
-        user_form = UserEditForm(request.POST, instance=user)
-        password_form = UserPasswordChangeForm(user, request.POST)
 
         if user_form.is_valid():
             user_form.save()
             messages.success(request, 'Пользователь успешно изменен')
 
-            if password_form.is_valid():
-                # Only save the password form if the old and new passwords are supplied
-                if password_form.cleaned_data['old_password'] and \
-                        password_form.cleaned_data['new_password1']:
-                    password_form.save()
-                    update_session_auth_hash(request, password_form.user)
-                    messages.success(request, 'Пользователь успешно изменен')
+        if password_form.is_valid():
+            if password_form.cleaned_data['old_password'] and \
+                    password_form.cleaned_data['new_password1']:
+                password_form.save()
+                update_session_auth_hash(request, password_form.user)
+                messages.success(request, 'Пароль успешно изменен')
 
-            return redirect('user_list')
+        context = {
+            'user_form': user_form,
+            'password_form': password_form,
+        }
 
+        return redirect('user_list')
 
     else:
-        user_form = UserEditForm(instance=user)
-        password_form = UserPasswordChangeForm(user)
-
-    context = {
-        'user_form': user_form,
-        'password_form': password_form,
-    }
+        context = {
+            'user_form': user_form,
+            'password_form': password_form,
+        }
 
     return render(request, 'users/edit_user.html', context)
+
 
 
 
