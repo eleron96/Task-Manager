@@ -6,8 +6,8 @@
   <form method="post">
     {% csrf_token %}
     {{ user_form|crispy }}
-    {{ password_form.new_password1|as_crispy_field }}
-    {{ password_form.new_password2|as_crispy_field }}
+    {{ password_form.id_new_password1|as_crispy_field }}
+    {{ password_form.id_new_password2|as_crispy_field }}
 
     <button type="submit" class="btn btn-primary">Изменить</button>
   </form>
