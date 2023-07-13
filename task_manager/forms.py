@@ -41,4 +41,3 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     new_password2 = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-
