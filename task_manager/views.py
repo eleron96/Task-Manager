@@ -1,13 +1,28 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, password_validation
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import UserEditForm, CreateUserForm, \
     UserPasswordChangeForm
 from django.shortcuts import render
 from django.http import HttpResponse
+from django import forms
+
+class UserPasswordChangeForm(PasswordChangeForm):
+    new_password1 = forms.CharField(
+        label="Новый пароль",
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'id': 'id_password1'}),
+        help_text=password_validation.password_validators_help_text_html(),
+    )
+    new_password2 = forms.CharField(
+        label="Подтвердите новый пароль",
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'id': 'id_password2'}),
+        strip=False,
+        help_text="Введите тот же пароль, что и прежде, для проверки.",
+    )
 
 def index(request):
     a = None
