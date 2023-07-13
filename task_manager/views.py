@@ -56,23 +56,23 @@ def edit_user(request, pk):
         return redirect('user_list')
 
     if request.method == 'POST':
+        user_form = UserEditForm(request.POST, instance=user)
         password_form = UserPasswordChangeForm(user, request.POST)
 
-        if password_form.is_valid():
-            # Only save the password form if the old and new passwords are supplied
-            if password_form.cleaned_data['old_password'] and \
-                    password_form.cleaned_data['new_password1']:
-                password_form.save()
-                update_session_auth_hash(request, password_form.user)
-                messages.success(request, 'Ваш пароль успешно обновлен!')
-                return redirect('user_list')
+        if user_form.is_valid():
+            user_form.save()
+            messages.success(request, 'Пользователь успешно изменен')
 
-        else:
-            user_form = UserEditForm(request.POST, instance=user)
-            if user_form.is_valid():
-                user_form.save()
-                messages.success(request, 'Ваш профиль успешно обновлен!')
-                return redirect('user_list')
+            if password_form.is_valid():
+                # Only save the password form if the old and new passwords are supplied
+                if password_form.cleaned_data['old_password'] and \
+                        password_form.cleaned_data['new_password1']:
+                    password_form.save()
+                    update_session_auth_hash(request, password_form.user)
+                    messages.success(request, 'Пользователь успешно изменен')
+
+            return redirect('user_list')
+
 
     else:
         user_form = UserEditForm(instance=user)
