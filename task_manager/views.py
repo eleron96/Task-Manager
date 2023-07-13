@@ -8,13 +8,15 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .forms import UserEditForm, CreateUserForm, \
     UserPasswordChangeForm
 from django.http import HttpResponse
-
+from django.views.generic.edit import UpdateView
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 def index(request):
     a = None
-    a.hello() # Creating an error with an invalid line of code
+    a.hello()
     return HttpResponse("Hello, world. You're at the pollapp index.")
+
 
 def index(request):
     users = User.objects.all()
@@ -33,11 +35,11 @@ def user_list(request):
 
 def create_user(request):
     if request.method == 'POST':
-        form = CreateUserForm(request.POST)  # Используйте CreateUserForm
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Пользователь успешно зарегистрирован')
-            return redirect('login')  # redirect to login page
+            return redirect('login')
     else:
         form = CreateUserForm()  # Используйте CreateUserForm
     return render(request, 'users/create_user.html', {'form': form})
@@ -47,43 +49,32 @@ def create_user(request):
 def edit_user(request, pk):
     user = get_object_or_404(User, pk=pk)
     if request.user != user:
-        messages.error(request, 'У вас нет прав для изменения другого '
-                                'пользователя.', extra_tags='danger')
+        messages.error(request,
+                       'У вас нет прав для изменения другого пользователя.',
+                       extra_tags='danger')
         return redirect('user_list')
 
     user_form = UserEditForm(request.POST or None, instance=user)
     password_form = UserPasswordChangeForm(user, request.POST or None)
 
     if request.method == 'POST':
+        messages.success(request, 'Пользователь успешно изменен')
+        if password_form.is_valid() and password_form.cleaned_data[
+            'old_password'] and password_form.cleaned_data['new_password1']:
+            password_form.save()
+            update_session_auth_hash(request, password_form.user)
 
         if user_form.is_valid():
             user_form.save()
-            messages.success(request, 'Пользователь успешно изменен')
-
-        if password_form.is_valid():
-            if password_form.cleaned_data['old_password'] and \
-                    password_form.cleaned_data['new_password1']:
-                password_form.save()
-                update_session_auth_hash(request, password_form.user)
-                messages.success(request, 'Пароль успешно изменен')
-
-        context = {
-            'user_form': user_form,
-            'password_form': password_form,
-        }
 
         return redirect('user_list')
 
-    else:
-        context = {
-            'user_form': user_form,
-            'password_form': password_form,
-        }
+    context = {
+        'user_form': user_form,
+        'password_form': password_form,
+    }
 
     return render(request, 'users/edit_user.html', context)
-
-
-
 
 
 def login_view(request):
@@ -103,17 +94,18 @@ def login_view(request):
                     return redirect('home')
             else:
                 messages.error(request, 'Пожалуйста, введите правильные имя '
-                                 'пользователя и пароль. Оба поля '
-                                 'могут быть чувствительны к регистру.', extra_tags='danger')
+                                        'пользователя и пароль. Оба поля '
+                                        'могут быть чувствительны к регистру.',
+                               extra_tags='danger')
         else:
             for msg in form.non_field_errors():
                 messages.error(request, msg)
     else:
         form = AuthenticationForm()
         if 'next' in request.GET:
-            messages.error(request, 'Пожалуйста, войдите, чтобы продолжить.', extra_tags='danger')
+            messages.error(request, 'Пожалуйста, войдите, чтобы продолжить.',
+                           extra_tags='danger')
     return render(request, 'registration/login.html', {'form': form})
-
 
 
 def logout_view(request):
@@ -135,3 +127,12 @@ def delete_user(request, pk):
         return redirect('user_list')
     else:
         return render(request, 'users/confirm_delete.html', {'user': user})
+
+class UserEditView(UpdateView, SuccessMessageMixin):
+    model = User
+    template_name = 'users/edit_user.html'
+    form_class = UserEditForm
+    success_url = '/users/'
+    success_message = 'Пользователь успешно изменен'
+
+

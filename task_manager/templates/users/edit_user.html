@@ -5,7 +5,7 @@
   <h2>Изменение пользователя</h2>
   <form method="post">
     {% csrf_token %}
-    {{ user_form|crispy }}
+    {{ form|crispy }}
     <button type="submit" class="btn btn-primary">Изменить</button>
   </form>
 {% endblock %}

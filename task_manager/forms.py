@@ -10,16 +10,6 @@ class UserEditForm(UserCreationForm):
         model = User
         fields = ('first_name', 'last_name', 'username')
 
-    def clean_username(self):
-        username = self.cleaned_data.get('username')
-        try:
-            user = User.objects.get(username=username)
-            if user != self.instance:
-                raise forms.ValidationError(
-                    'Пользователь с таким именем уже существует.')
-        except User.DoesNotExist:
-            pass
-        return username
 
 class CreateUserForm(UserCreationForm):
     class Meta:
