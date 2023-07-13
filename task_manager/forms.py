@@ -6,6 +6,10 @@ from crispy_forms.layout import Layout, Submit
 from crispy_forms.helper import FormHelper
 
 class UserEditForm(UserChangeForm):
+    first_name = forms.CharField(label='Имя', widget=forms.TextInput(attrs={'id': 'id_first_name'}))
+    last_name = forms.CharField(label='Фамилия', widget=forms.TextInput(attrs={'id': 'id_last_name'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'id': 'id_username'}))
+
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email')
