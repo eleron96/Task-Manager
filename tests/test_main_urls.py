@@ -27,5 +27,5 @@ class TestUrls(TestCase):
         self.assertEqual(resolve(path).func, views.user_list)
 
     def test_create_user_url(self):
-        path = reverse('create_user')
+        path = reverse('users:create_user')
         self.assertEqual(resolve(path).func, views.create_user)
