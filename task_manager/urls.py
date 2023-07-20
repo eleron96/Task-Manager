@@ -15,15 +15,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
-from status.views import status_task, create_status, edit_status, delete_status
-from labels.views import label, create_label, edit_label, delete_label
+from task_manager.status.views import status_task, create_status, edit_status, \
+    delete_status
+from task_manager.labels.views import label, create_label, edit_label, \
+    delete_label
 from task_manager import views
 from .views import index
 
-
-from tasks.views import edit_tasks, delete_tasks, tasks_list, \
+from task_manager.tasks.views import edit_tasks, delete_tasks, tasks_list, \
     create_tasks
 
 urlpatterns = [
@@ -32,10 +33,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
-    path('users/', views.user_list, name='user_list'),
-    path('users/create/', views.create_user, name='create_user'),
-    path('users/<int:pk>/update/', views.UserEditView.as_view(), name='edit_user'),
-    path('users/<int:pk>/delete/', views.delete_user, name='delete_user'),
+    path('users/', include('task_manager.users.urls')),
     path('statuses/', status_task, name='status_task'),
     path('statuses/create/', create_status, name='create_status'),
     path('status/edit/<int:status_id>/', edit_status, name='edit_status'),

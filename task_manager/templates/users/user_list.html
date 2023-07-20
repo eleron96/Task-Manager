@@ -5,7 +5,7 @@
 {% block content %}
     {% for user in users %}
         <p>{{ user.username }}
-        <a href="{% url 'task_manager:edit_user' user.id %}">Edit</a>
-        <a href="{% url 'task_manager:delete_user' user.id %}">Delete</a></p>
+        <a href="{% url 'users:edit_user' user.id %}">Edit</a>
+        <a href="{% url 'users:delete_user' user.id %}">Delete</a></p>
     {% endfor %}
 {% endblock %}

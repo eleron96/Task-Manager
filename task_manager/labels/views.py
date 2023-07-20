@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from labels.models import labels
-from labels.forms import labelsForm
+from task_manager.labels.models import labels
+from task_manager.labels.forms import labelsForm
 from django.contrib import messages
-from tasks.models import Task
+from task_manager.tasks.models import Task
 
 @login_required
 def label(request):

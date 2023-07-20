@@ -1,5 +1,5 @@
+from django.contrib.auth import get_user_model
 from django.test import RequestFactory, TestCase
-from django.contrib.auth.models import User
 from django.urls import reverse
 
 from task_manager.views import (index, home, user_list,
@@ -9,7 +9,7 @@ from task_manager.views import (index, home, user_list,
 class ViewsTestCase(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
-        self.user = User.objects.create_user(
+        self.user = get_user_model().objects.create_user(
             username='testuser',
             email='testuser@example.com',
             password='testpassword'

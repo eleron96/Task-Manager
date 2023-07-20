@@ -1,7 +1,8 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from task_manager.forms import UserEditForm, CreateUserForm, \
     CustomPasswordChangeForm
-from django.contrib.auth.models import User
+
 
 class TestForms(TestCase):
     def test_user_edit_form_valid_data(self):
@@ -38,7 +39,7 @@ class TestForms(TestCase):
         self.assertEqual(len(form.errors), 5)
 
     def test_custom_password_change_form_valid_data(self):
-        user = User.objects.create_user(
+        user = get_user_model().objects.create_user(
             username='testuser',
             email='testuser@example.com',
             password='testpassword'
@@ -53,7 +54,7 @@ class TestForms(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_custom_password_change_form_no_data(self):
-        user = User.objects.create_user(
+        user = get_user_model().objects.create_user(
             username='testuser',
             email='testuser@example.com',
             password='testpassword'

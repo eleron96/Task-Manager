@@ -1,15 +1,16 @@
 from django import forms
+from django.contrib.auth import get_user_model
 
-from status.models import Status
-from labels.models import labels
-from django.contrib.auth.models import User
+from task_manager.status.models import Status
+from task_manager.labels.models import labels
 from .models import Task
+
 
 class TaskForm(forms.ModelForm):
     name = forms.CharField(max_length=100)
     description = forms.CharField(widget=forms.Textarea)
     status = forms.ModelChoiceField(queryset=Status.objects.all())
-    executor = forms.ModelChoiceField(queryset=User.objects.all())
+    executor = forms.ModelChoiceField(queryset=get_user_model().objects.all())
     label = forms.ModelChoiceField(queryset=labels.objects.all(), required=False)
 
     class Meta:
@@ -25,7 +26,7 @@ class TaskForm(forms.ModelForm):
 
 class TaskFilterForm(forms.Form):
     status = forms.ModelChoiceField(queryset=Status.objects.all(), required=False)
-    executor = forms.ModelChoiceField(queryset=User.objects.all(), required=False)
+    executor = forms.ModelChoiceField(queryset=get_user_model().objects.all(), required=False)
     label = forms.ModelChoiceField(queryset=labels.objects.all(), required=False)
     my_tasks = forms.BooleanField(required=False)
 

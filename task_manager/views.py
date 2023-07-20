@@ -1,81 +1,21 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout, \
-    password_validation, update_session_auth_hash
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404, redirect, render
-from .forms import UserEditForm, CreateUserForm, \
-    UserPasswordChangeForm
-from django.http import HttpResponse
-from django.views.generic.edit import UpdateView
+from django.shortcuts import redirect, render
+from task_manager.users.forms import UserEditForm
 from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic.edit import UpdateView
 
 
 def index(request):
-    a = None
-    a.hello()
-    return HttpResponse("Hello, world. You're at the pollapp index.")
-
-
-def index(request):
-    users = User.objects.all()
+    users = get_user_model().objects.all()
     return render(request, 'index.html', {'users': users})
 
 
 def home(request):
-    users = User.objects.all()
+    users = get_user_model().objects.all()
     return render(request, 'home.html', {'users': users})
-
-
-def user_list(request):
-    users = User.objects.all()
-    return render(request, 'users/users.html', {'users': users})
-
-
-def create_user(request):
-    if request.method == 'POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Пользователь успешно зарегистрирован')
-            return redirect('login')
-    else:
-        form = CreateUserForm()  # Используйте CreateUserForm
-    return render(request, 'users/create_user.html', {'form': form})
-
-
-@login_required
-def edit_user(request, pk):
-    user = get_object_or_404(User, pk=pk)
-    if request.user != user:
-        messages.error(request,
-                       'У вас нет прав для изменения другого пользователя.',
-                       extra_tags='danger')
-        return redirect('user_list')
-
-    user_form = UserEditForm(request.POST or None, instance=user)
-    password_form = UserPasswordChangeForm(user, request.POST or None)
-
-    if request.method == 'POST':
-        messages.success(request, 'Пользователь успешно изменен')
-        if password_form.is_valid() and password_form.cleaned_data[
-            'old_password'] and password_form.cleaned_data['new_password1']:
-            password_form.save()
-            update_session_auth_hash(request, password_form.user)
-
-        if user_form.is_valid():
-            user_form.save()
-
-        return redirect('user_list')
-
-    context = {
-        'user_form': user_form,
-        'password_form': password_form,
-    }
-
-    return render(request, 'users/edit_user.html', context)
-
 
 def login_view(request):
     if request.method == 'POST':
@@ -116,7 +56,7 @@ def logout_view(request):
 
 @login_required
 def delete_user(request, pk):
-    user = User.objects.get(pk=pk)
+    user = get_user_model().objects.get(pk=pk)
     if request.user != user:
         messages.error(request, 'У вас нет прав для изменения другого '
                                 'пользователя.')
@@ -129,10 +69,9 @@ def delete_user(request, pk):
         return render(request, 'users/confirm_delete.html', {'user': user})
 
 class UserEditView(UpdateView, SuccessMessageMixin):
-    model = User
+    model = get_user_model()
     template_name = 'users/edit_user.html'
     form_class = UserEditForm
     success_url = '/users/'
     success_message = 'Пользователь успешно изменен'
-
 

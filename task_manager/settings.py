@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['webserver', '127.0.0.1', '0.0.0.0', 'python-project-52-production-d69b.up.railway.app']
-
+AUTH_USER_MODEL = 'users.User'
 
 # Application definition
 
@@ -43,13 +43,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'task_manager',
-    'status',
-    'labels',
-    'tasks',
+    'task_manager.status',
+    'task_manager.labels',
+    'task_manager.tasks',
+    'task_manager.users.apps.UsersConfig',
     'crispy_forms',
     'crispy_bootstrap4',
     'bootstrap4',
     'django_filters',
+
 ]
 
 MIDDLEWARE = [
