@@ -60,11 +60,11 @@ def delete_user(request, pk):
     if request.user != user:
         messages.error(request, 'У вас нет прав для изменения другого '
                                 'пользователя.')
-        return redirect('user_list')
+        return redirect('users:user_list')
     if request.method == 'POST':
         user.delete()
         messages.success(request, 'Пользователь успешно удален.')
-        return redirect('user_list')
+        return redirect('users:user_list')
     else:
         return render(request, 'users/confirm_delete.html', {'user': user})
 

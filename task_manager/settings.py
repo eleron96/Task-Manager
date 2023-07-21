@@ -76,7 +76,7 @@ ROLLBAR = {
 ROOT_URLCONF = 'task_manager.urls'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
-MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+# MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 
