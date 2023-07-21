@@ -81,7 +81,7 @@ msgstr "Задачи"
 
 #: task_manager/templates/header.html:30
 msgid "Logout"
-msgstr "Выйти"
+msgstr "Выход"
 
 #: task_manager/templates/header.html:34 task_manager/templates/home.html:9
 #: task_manager/templates/registration/login.html:3
@@ -195,7 +195,7 @@ msgid "Delete"
 msgstr "Удалить"
 
 #: task_manager/templates/registration/login.html:6
-msgid "login"
+msgid "Sinup"
 msgstr "Вход"
 
 #: task_manager/templates/status/confirm_delete.html:3
