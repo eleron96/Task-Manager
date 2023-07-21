@@ -44,7 +44,6 @@ urlpatterns = [
     path('delete/<int:label_id>/', delete_label, name='delete_label'),
     path('tasks/', tasks_list, name='tasks'),
     path('tasks/create/', create_tasks, name='create_tasks'),
-    path('tasks/edit/<int:task_id>/', edit_tasks, name='edit_tasks'),
-    path('tasks/delete/<int:task_id>/', delete_tasks, name='delete_tasks'),
-
+    path('tasks/<int:task_id>/update/', edit_tasks, name='edit_tasks'),
+    path('tasks/<int:task_id>/delete/', delete_tasks, name='delete_tasks'),
 ]
