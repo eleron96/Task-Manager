@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-21 20:48+0000\n"
+"POT-Creation-Date: 2023-07-21 21:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,11 +83,10 @@ msgstr "Задачи"
 msgid "Logout"
 msgstr "Выход"
 
-#: task_manager/templates/header.html:34 task_manager/templates/home.html:9
-#: task_manager/templates/registration/login.html:3
-#: task_manager/templates/registration/login.html:23
-msgid "Login"
-msgstr "Войти"
+#: task_manager/templates/header.html:34
+#: task_manager/templates/registration/login.html:6
+msgid "Sinup"
+msgstr "Вход"
 
 #: task_manager/templates/header.html:37 task_manager/templates/home.html:10
 msgid "Registration"
@@ -96,6 +95,12 @@ msgstr "Регистрация"
 #: task_manager/templates/home.html:4
 msgid "Hexlet Task Manager"
 msgstr "Менеджер задач Hexlet"
+
+#: task_manager/templates/home.html:9
+#: task_manager/templates/registration/login.html:3
+#: task_manager/templates/registration/login.html:23
+msgid "Login"
+msgstr "Войти"
 
 #: task_manager/templates/home.html:17
 msgid "Hello from Hexlet!"
@@ -194,10 +199,6 @@ msgstr "Дата создания"
 msgid "Delete"
 msgstr "Удалить"
 
-#: task_manager/templates/registration/login.html:6
-msgid "Sinup"
-msgstr "Вход"
-
 #: task_manager/templates/status/confirm_delete.html:3
 #: task_manager/templates/status/confirm_delete.html:6
 msgid "Delete status"
@@ -254,9 +255,13 @@ msgstr "Да, удалить"
 msgid "No, go back"
 msgstr "Отмена"
 
-#: task_manager/templates/users/create_user.html:10
+#: task_manager/templates/users/create_user.html:7
 msgid "Register"
 msgstr "Регистрация"
+
+#: task_manager/templates/users/create_user.html:11
+msgid "Registrate"
+msgstr "Зарегистрировать"
 
 #: task_manager/templates/users/edit_user.html:7
 msgid "Modify User"
@@ -277,6 +282,9 @@ msgstr "Полное имя"
 #: task_manager/templates/users/users.html:33
 msgid "No users found"
 msgstr "Пользователь не найден"
+
+#~ msgid "Create User"
+#~ msgstr "Регистрация"
 
 #, fuzzy
 #~| msgid "Delete"
