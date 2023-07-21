@@ -63,7 +63,7 @@ def edit_status(request, status_id):
             form.save()
             messages.success(request, "Статус успешно обновлен!")
             return redirect(
-                'status_task')  # Or wherever you want to redirect after successful form submission
+                'status_task')
     else:
         form = StatusForm(instance=status)
     return render(request, 'status/edit_status.html', {'form': form})

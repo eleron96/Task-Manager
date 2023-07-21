@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Удаление пользователя</h2>
-<p>Вы уверены, что хотите удалить {{ user.username }}?</p>
+<h2>{% trans "Delete User" %}</h2>
+<p>{% trans "Are you sure you want to delete" %} {{ user.username }}?</p>
 <form method="post">
   {% csrf_token %}
-  <input type="submit" value="Да, удалить" class="btn btn-danger">
-  <a href="{% url 'home' %}" class="btn btn-secondary">Нет, вернуться назад</a>
+  <input type="submit" value="{% trans 'Yes, delete' %}" class="btn btn-danger">
+  <a href="{% url 'home' %}" class="btn btn-secondary">{% trans "No, go back" %}</a>
 </form>
 {% endblock %}

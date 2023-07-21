@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 {% load bootstrap4 %}
 
 {% block content %}
-  <h2>Изменение пользователя</h2>
+  <h2>{% trans "Modify User" %}</h2>
   <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
 <!--    {{ form|crispy }}-->
-    <button type="submit" class="btn btn-primary">Изменить</button>
+    <button type="submit" class="btn btn-primary">{% trans "Edit" %}</button>
   </form>
 {% endblock %}

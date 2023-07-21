@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% trans "Статусы" %}{% endblock %}
+{% block title %}{% trans "Statuses" %}{% endblock %}
 
 {% block content %}
-  <h2>Статусы</h2>
+  <h2>{% trans "Statuses" %}</h2>
 
   <div class="mb-3">
-    <a href="{% url 'create_status' %}" class="btn btn-primary btn-sm">{% trans "Создать статус" %}</a>
+    <a href="{% url 'create_status' %}" class="btn btn-primary btn-sm">{% trans "Create status" %}</a>
   </div>
 
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">id</th>
-        <th scope="col">Имя</th>
-        <th scope="col">Дата создания</th>
+        <th scope="col">{% trans "id" %}</th>
+        <th scope="col">{% trans "Name" %}</th>
+        <th scope="col">{% trans "Creation date" %}</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -25,7 +25,7 @@
         <td>{{ status.name }}</td>
         <td>{{ status.created_date|date:"d.m.Y H:i"  }}</td>
         <td>
-          <a href="{% url 'edit_status' status.id %}">Изменить</a>
+          <a href="{% url 'edit_status' status.id %}">{% trans "Edit" %}</a>
           <br>
           <a href="{% url 'delete_status' status.id %}">{% trans "Delete" %}</a>
         </td>

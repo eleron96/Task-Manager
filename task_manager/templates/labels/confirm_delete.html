@@ -3,13 +3,13 @@
 {% block title %}{% trans "Delete Status" %}{% endblock %}
 
 {% block content %}
-  <h2>Удаление метки</h2>
+  <h2>{% trans "Delete label" %}</h2>
 
-  <p>Вы уверены, что хотите удалить "{{ status.name }}"?</p>
+  <p>{% trans "Are you sure you want to delete" %} "{{ status.name }}"?</p>
 
   <form method="post">
     {% csrf_token %}
-    <input type="submit" value="Подтвердить" class="btn btn-danger">
-    <a href="{% url 'status_task' %}" class="btn btn-secondary">Отмена</a>
+    <input type="submit" value="{% trans 'Confirm' %}" class="btn btn-danger">
+    <a href="{% url 'status_task' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
   </form>
 {% endblock %}

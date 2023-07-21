@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}User List{% endblock %}
+{% block title %}{% trans "User List" %}{% endblock %}
 
 {% block content %}
     {% for user in users %}
         <p>{{ user.username }}
-        <a href="{% url 'users:edit_user' user.id %}">Edit</a>
-        <a href="{% url 'users:delete_user' user.id %}">Delete</a></p>
+        <a href="{% url 'users:edit_user' user.id %}">{% trans "Edit" %}</a>
+        <a href="{% url 'users:delete_user' user.id %}">{% trans "Delete" %}</a></p>
     {% endfor %}
 {% endblock %}

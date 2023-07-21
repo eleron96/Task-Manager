@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-21 20:40+0300\n"
+"POT-Creation-Date: 2023-07-21 20:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,112 +20,314 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: task_manager/status/models.py:6
+#: task_manager/labels/models.py:6 task_manager/status/models.py:6
+#: task_manager/tasks/models.py:10 task_manager/templates/labels/label.html:16
+#: task_manager/templates/status/status_task.html:16
+#: task_manager/templates/tasks/tasks.html:62
 msgid "Name"
 msgstr "Имя"
 
+#: task_manager/tasks/models.py:11
+#, fuzzy
+#| msgid "Registration"
+msgid "Description"
+msgstr "Регистрация"
+
+#: task_manager/tasks/models.py:12 task_manager/templates/tasks/tasks.html:15
+#: task_manager/templates/tasks/tasks.html:63
+msgid "Status"
+msgstr "Статус"
+
+#: task_manager/tasks/models.py:13 task_manager/templates/tasks/tasks.html:64
+msgid "Author"
+msgstr "Автор"
+
+#: task_manager/tasks/models.py:14 task_manager/templates/tasks/tasks.html:27
+#: task_manager/templates/tasks/tasks.html:65
+msgid "Executor"
+msgstr "Исполнитель"
+
+#: task_manager/tasks/models.py:15 task_manager/templates/tasks/tasks.html:37
+msgid "Label"
+msgstr "Метка"
+
+#: task_manager/templates/header.html:3 task_manager/templates/home.html:6
+msgid "Task Manager"
+msgstr "Менеджер задач"
+
+#: task_manager/templates/header.html:10 task_manager/templates/home.html:8
+#: task_manager/templates/users/users.html:4
+#: task_manager/templates/users/users.html:7
+msgid "Users"
+msgstr "Пользователи"
+
 #: task_manager/templates/header.html:14
+#: task_manager/templates/status/status_task.html:3
+#: task_manager/templates/status/status_task.html:6
 msgid "Statuses"
 msgstr "Статусы"
 
 #: task_manager/templates/header.html:17
+#: task_manager/templates/labels/label.html:3
+#: task_manager/templates/labels/label.html:6
 msgid "Labels"
 msgstr "Метки"
 
 #: task_manager/templates/header.html:20
 #: task_manager/templates/tasks/tasks.html:3
-msgid "Задачи"
-msgstr ""
+#: task_manager/templates/tasks/tasks.html:6
+msgid "Tasks"
+msgstr "Задачи"
 
 #: task_manager/templates/header.html:30
-msgid "Выход"
-msgstr ""
+msgid "Logout"
+msgstr "Выйти"
 
-#: task_manager/templates/header.html:34
+#: task_manager/templates/header.html:34 task_manager/templates/home.html:9
 #: task_manager/templates/registration/login.html:3
 #: task_manager/templates/registration/login.html:6
-msgid "Вход"
-msgstr ""
+#: task_manager/templates/registration/login.html:23
+msgid "Login"
+msgstr "Вход"
 
-#: task_manager/templates/header.html:37
-msgid "Регистрация"
-msgstr ""
+#: task_manager/templates/header.html:37 task_manager/templates/home.html:10
+msgid "Registration"
+msgstr "Регистрация"
+
+#: task_manager/templates/home.html:4
+msgid "Hexlet Task Manager"
+msgstr "Менеджер задач Hexlet"
+
+#: task_manager/templates/home.html:17
+msgid "Hello from Hexlet!"
+msgstr "Привет от Hexlet!"
+
+#: task_manager/templates/home.html:18
+msgid "Practical programming courses"
+msgstr "Практические курсы по программированию"
+
+#: task_manager/templates/home.html:20
+msgid "Learn more"
+msgstr "Узнать больше"
 
 #: task_manager/templates/labels/confirm_delete.html:3
-#: task_manager/templates/status/confirm_delete.html:3
-#, fuzzy
-#| msgid "Delete"
 msgid "Delete Status"
-msgstr "Удалить"
+msgstr "Удалить статус"
+
+#: task_manager/templates/labels/confirm_delete.html:6
+msgid "Delete label"
+msgstr "Удаление метки"
+
+#: task_manager/templates/labels/confirm_delete.html:8
+#: task_manager/templates/status/confirm_delete.html:8
+#: task_manager/templates/tasks/confirm_delete.html:8
+#: task_manager/templates/users/confirm_delete.html:5
+msgid "Are you sure you want to delete"
+msgstr "Вы уверены, что хотите удалить"
+
+#: task_manager/templates/labels/confirm_delete.html:12
+#: task_manager/templates/status/confirm_delete.html:12
+#: task_manager/templates/tasks/confirm_delete.html:12
+msgid "Confirm"
+msgstr "Да, удалить"
+
+#: task_manager/templates/labels/confirm_delete.html:13
+#: task_manager/templates/status/confirm_delete.html:13
+#: task_manager/templates/tasks/confirm_delete.html:13
+msgid "Cancel"
+msgstr "Отмена"
 
 #: task_manager/templates/labels/create_labels.html:3
 #: task_manager/templates/labels/create_labels.html:6
-#: task_manager/templates/labels/label.html:9
-msgid "Создать метку"
-msgstr ""
+msgid "Create Label"
+msgstr "Создать"
 
 #: task_manager/templates/labels/create_labels.html:13
-msgid "Текст"
-msgstr ""
+msgid "Text"
+msgstr "Текст"
 
 #: task_manager/templates/labels/create_labels.html:17
 #: task_manager/templates/status/create_status.html:18
 #: task_manager/templates/tasks/create_tasks.html:10
-msgid "Сохранить"
-msgstr ""
+msgid "Create"
+msgstr "Создать"
 
-#: task_manager/templates/labels/label.html:3
-#: task_manager/templates/labels/label.html:6
-msgid "Метки"
-msgstr ""
+#: task_manager/templates/labels/edit_labels.html:3
+#: task_manager/templates/labels/edit_labels.html:6
+msgid "Edit Label"
+msgstr "Изменение метки"
 
-#: task_manager/templates/labels/label.html:16
-msgid "Имя"
-msgstr ""
+#: task_manager/templates/labels/edit_labels.html:10
+#: task_manager/templates/labels/label.html:28
+#: task_manager/templates/status/edit_status.html:10
+#: task_manager/templates/status/status_task.html:28
+#: task_manager/templates/tasks/edit_tasks.html:10
+#: task_manager/templates/tasks/tasks.html:80
+#: task_manager/templates/users/edit_user.html:12
+#: task_manager/templates/users/user_list.html:9
+#: task_manager/templates/users/users.html:26
+msgid "Edit"
+msgstr "Изменить"
+
+#: task_manager/templates/labels/label.html:9
+msgid "Create label"
+msgstr "Создать метку"
+
+#: task_manager/templates/labels/label.html:15
+#: task_manager/templates/status/status_task.html:15
+#: task_manager/templates/tasks/tasks.html:61
+#: task_manager/templates/users/users.html:11
+msgid "id"
+msgstr "ID"
 
 #: task_manager/templates/labels/label.html:17
-msgid "Дата создания"
-msgstr ""
+#: task_manager/templates/status/status_task.html:17
+#: task_manager/templates/tasks/tasks.html:66
+#: task_manager/templates/users/users.html:14
+msgid "Creation date"
+msgstr "Дата создания"
 
 #: task_manager/templates/labels/label.html:30
 #: task_manager/templates/status/status_task.html:30
-#: task_manager/templates/tasks/tasks.html:84
+#: task_manager/templates/tasks/tasks.html:82
+#: task_manager/templates/users/user_list.html:10
 #: task_manager/templates/users/users.html:28
 msgid "Delete"
 msgstr "Удалить"
 
+#: task_manager/templates/status/confirm_delete.html:3
+#: task_manager/templates/status/confirm_delete.html:6
+msgid "Delete status"
+msgstr "Удаление статуса"
+
 #: task_manager/templates/status/create_status.html:4
 #: task_manager/templates/status/create_status.html:7
 #: task_manager/templates/status/status_task.html:9
-msgid "Создать статус"
-msgstr ""
+msgid "Create status"
+msgstr "Создать статус"
 
-#: task_manager/templates/status/status_task.html:3
-msgid "Статусы"
-msgstr ""
+#: task_manager/templates/status/edit_status.html:3
+#: task_manager/templates/status/edit_status.html:6
+msgid "Edit Status"
+msgstr "Изменение статуса"
 
 #: task_manager/templates/tasks/confirm_delete.html:3
-#, fuzzy
-#| msgid "Delete"
-msgid "Delete Tasks"
-msgstr "Удалить"
+#: task_manager/templates/tasks/confirm_delete.html:6
+msgid "Delete task"
+msgstr "Удаление задачи"
 
 #: task_manager/templates/tasks/create_tasks.html:3
 #: task_manager/templates/tasks/create_tasks.html:6
 #: task_manager/templates/tasks/tasks.html:9
-msgid "Создать задачу"
+msgid "Create Task"
+msgstr "Создать задачу"
+
+#: task_manager/templates/tasks/edit_tasks.html:3
+#: task_manager/templates/tasks/edit_tasks.html:6
+msgid "Edit Task"
+msgstr "Изменение задачи"
+
+#: task_manager/templates/tasks/tasks.html:21
+msgid "No Data"
 msgstr ""
 
-#: task_manager/templates/users/users.html:4
-msgid "Users"
-msgstr ""
+#: task_manager/templates/tasks/tasks.html:49
+msgid "Only my tasks"
+msgstr "Только свои задачи"
+
+#: task_manager/templates/tasks/tasks.html:53
+msgid "Show"
+msgstr "Показать"
+
+#: task_manager/templates/users/confirm_delete.html:4
+msgid "Delete User"
+msgstr "Удаление пользователя"
+
+#: task_manager/templates/users/confirm_delete.html:8
+msgid "Yes, delete"
+msgstr "Да, удалить"
+
+#: task_manager/templates/users/confirm_delete.html:9
+msgid "No, go back"
+msgstr "Отмена"
+
+#: task_manager/templates/users/create_user.html:10
+msgid "Register"
+msgstr "Регистрация"
+
+#: task_manager/templates/users/edit_user.html:7
+msgid "Modify User"
+msgstr "Изменение пользователя"
+
+#: task_manager/templates/users/user_list.html:4
+msgid "User List"
+msgstr "Пользователи"
+
+#: task_manager/templates/users/users.html:12
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: task_manager/templates/users/users.html:13
+msgid "Full Name"
+msgstr "Полное имя"
 
 #: task_manager/templates/users/users.html:33
 msgid "No users found"
 msgstr "Пользователь не найден"
 
-#~ msgid "Edit"
-#~ msgstr "Редактировать"
+#, fuzzy
+#~| msgid "Delete"
+#~ msgid "Delete tasks"
+#~ msgstr "Удалить задачи"
 
-#~ msgid "User name"
-#~ msgstr "Имя пользователя"
+#, fuzzy
+#~| msgid "Creation date"
+#~ msgid "Creation Date"
+#~ msgstr "Дата создания"
+
+#~ msgid "Update"
+#~ msgstr "дата"
+
+#~ msgid "date"
+#~ msgstr "дата"
+
+#~ msgid "Создать задачу"
+#~ msgstr "Создать задачу"
+
+#~ msgid "Сохранить"
+#~ msgstr "Сохранить"
+
+#~ msgid "Задачи"
+#~ msgstr "Задачи"
+
+#~ msgid "Создать метку"
+#~ msgstr "Создать метку"
+
+#~ msgid "Текст"
+#~ msgstr "Текст"
+
+#~ msgid "Метки"
+#~ msgstr "Метки"
+
+#~ msgid "Имя"
+#~ msgstr "Имя"
+
+#~ msgid "Дата создания"
+#~ msgstr "Дата создания"
+
+#~ msgid "Вход"
+#~ msgstr "Вход"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgid "Сreate status"
+#~ msgstr "Создать статус"
+
+#~ msgid "Редактировать статус"
+#~ msgstr "Редактировать статус"
+
+#~ msgid "Статусы"
+#~ msgstr "Статусы"
+
+#~ msgid "Date"
+#~ msgstr "Дата"

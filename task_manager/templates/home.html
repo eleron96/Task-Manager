@@ -1,21 +1,23 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Менеджер задач Hexlet{% endblock %}
+{% block title %}{% trans "Hexlet Task Manager" %}{% endblock %}
 
-{% block navbar_brand %}Менеджер задач{% endblock %}
+{% block navbar_brand %}{% trans "Task Manager" %}{% endblock %}
 
-{% block navlink1 %}Пользователи{% endblock %}
-{% block navlink2 %}Вход{% endblock %}
-{% block navlink3 %}Регистрация{% endblock %}
+{% block navlink1 %}{% trans "Users" %}{% endblock %}
+{% block navlink2 %}{% trans "Login" %}{% endblock %}
+{% block navlink3 %}{% trans "Registration" %}{% endblock %}
+
 
 {% block content %}
 <h1 class="my-4"></h1>
 <div class="card">
   <div class="card-body p-5 bg-light">
-    <div class="display-4">Привет от Хекслета!</div>
-    <p class="lead">Практические курсы по программированию</p>
+    <div class="display-4">{% trans "Hello from Hexlet!" %}</div>
+    <p class="lead">{% trans "Practical programming courses" %}</p>
     <hr>
-    <a class="btn btn-primary btn-lg" href="https://ru.hexlet.io">Узнать больше</a>
+    <a class="btn btn-primary btn-lg" href="https://ru.hexlet.io">{% trans "Learn more" %}</a>
   </div>
 </div>
 {% endblock %}

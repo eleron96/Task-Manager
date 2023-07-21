@@ -4,14 +4,14 @@
 {% block title %}{% trans "Users" %}{% endblock %}
 
 {% block content %}
-  <h2>Пользователи</h2>
+  <h2>{% trans "Users" %}</h2>
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">id</th>
-        <th scope="col">Имя пользователя</th>
-        <th scope="col">Полное имя</th>
-        <th scope="col">Дата создания</th>
+        <th scope="col">{% trans "id" %}</th>
+        <th scope="col">{% trans "Username" %}</th>
+        <th scope="col">{% trans "Full Name" %}</th>
+        <th scope="col">{% trans "Creation date" %}</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -23,7 +23,7 @@
           <td>{{ user.first_name }} {{ user.last_name }}</td>
           <td>{{ user.date_joined|date:"d.m.Y H:i" }}</td>
           <td>
-            <a href="{% url 'users:edit_user' user.id %}">Изменить</a>
+            <a href="{% url 'users:edit_user' user.id %}">{% trans "Edit" %}</a>
             <br>
             <a href="{% url 'users:delete_user' user.id %}">{% trans "Delete" %}</a>
           </td>
