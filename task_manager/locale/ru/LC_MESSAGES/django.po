@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-21 22:16+0000\n"
+"POT-Creation-Date: 2023-07-22 13:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -144,7 +144,7 @@ msgstr "Отмена"
 #: task_manager/templates/labels/create_labels.html:3
 #: task_manager/templates/labels/create_labels.html:6
 msgid "Create Label"
-msgstr "Создать"
+msgstr "Создать метку"
 
 #: task_manager/templates/labels/create_labels.html:13
 msgid "Text"
@@ -163,7 +163,7 @@ msgstr "Изменение метки"
 
 #: task_manager/templates/labels/edit_labels.html:10
 #: task_manager/templates/labels/label.html:28
-#: task_manager/templates/status/edit_status.html:10
+#: task_manager/templates/status/edit_status.html:12
 #: task_manager/templates/status/status_task.html:28
 #: task_manager/templates/tasks/edit_tasks.html:10
 #: task_manager/templates/tasks/tasks.html:80
@@ -210,8 +210,8 @@ msgstr "Удаление статуса"
 msgid "Create status"
 msgstr "Создать статус"
 
-#: task_manager/templates/status/edit_status.html:3
-#: task_manager/templates/status/edit_status.html:6
+#: task_manager/templates/status/edit_status.html:4
+#: task_manager/templates/status/edit_status.html:7
 msgid "Edit Status"
 msgstr "Изменение статуса"
 
