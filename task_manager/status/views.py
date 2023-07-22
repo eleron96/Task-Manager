@@ -46,7 +46,7 @@ def delete_status(request, status_id):
         if not Task.objects.filter(
                 status=status).exists():  # Проверяем, используется ли статус в задачах
             status.delete()
-            messages.success(request, 'Статус успешно удалён!')
+            messages.success(request, 'Статус успешно удален!')
         else:
             messages.error(request,
                            'Статус не может быть удалён, так как он используется в задаче.')
