@@ -37,7 +37,7 @@
         <label class="form-label" for="id_label">{% trans "Label" %}</label>
         <select name="label" class="form-select rounded" id="id_label">
           <option value="" selected>---------</option>
-          {% for label in form.label.field.queryset %}
+          {% for label in form.Label.field.queryset %}
             <option value="{{ label.id }}">{{ label.name }}</option>
           {% endfor %}
         </select>

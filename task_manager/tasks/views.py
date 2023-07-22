@@ -7,7 +7,6 @@ from task_manager.mixins import AuthorDeletionMixin, AuthRequiredMixin
 from task_manager.status.models import Status
 from task_manager.tasks.models import Task as TaskModel, Task
 from task_manager.tasks.forms import TaskForm, TaskFilterForm
-from task_manager.labels.models import labels
 
 from django.contrib import messages
 
