@@ -26,17 +26,17 @@ def create_status(request):
     return render(request, 'status/create_status.html', {'form': form})
 
 
-@login_required
-def edit_status(request, status_id):
-    status = Status.objects.get(pk=status_id)
-    if request.method == 'POST':
-        form = StatusForm(request.POST, instance=status)
-        if form.is_valid():
-            form.save()
-            return redirect('status_task')
-    else:
-        form = StatusForm(instance=status)
-    return render(request, 'edit_status.html', {'form': form})
+# @login_required
+# def edit_status(request, status_id):
+#     status = Status.objects.get(pk=status_id)
+#     if request.method == 'POST':
+#         form = StatusForm(request.POST, instance=status)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('status_task')
+#     else:
+#         form = StatusForm(instance=status)
+#     return render(request, 'edit_status.html', {'form': form})
 
 
 @login_required
@@ -62,7 +62,7 @@ def edit_status(request, status_id):
         form = StatusForm(request.POST, instance=status)
         if form.is_valid():
             form.save()
-            messages.success(request, "Статус успешно обновлен!")
+            messages.success(request, "Статус успешно изменен!")
             return redirect(
                 'status_task')
     else:
