@@ -17,7 +17,7 @@ def create_label(request):
         form = labelsForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Метка успешно создана!')
+            messages.success(request, 'Метка успешно создана')
             return redirect('label')
     else:
         form = labelsForm()
@@ -39,7 +39,7 @@ def delete_label(request, label_id):  # использовать label_id вме
     if request.method == 'POST':
         if not Task.objects.filter(label=label).exists(): # проверить, используется ли метка в задачах
             label.delete()
-            messages.success(request, 'Метка успешно удалена!')
+            messages.success(request, 'Метка успешно удалена')
         else:
             messages.error(request, 'Метка не может быть удалена, так как она используется в задаче.')
         return redirect('label')
@@ -54,7 +54,7 @@ def edit_label(request, status_id):
         form = labelsForm(request.POST, instance=status)
         if form.is_valid():
             form.save()
-            messages.success(request, "Метка успешно обновлен!")
+            messages.success(request, "Метка успешно изменена")
             return redirect('label')
     else:
         form = labelsForm(instance=status)
