@@ -14,7 +14,6 @@ class TaskForm(forms.ModelForm):
     name = forms.CharField(max_length=100, label=_('Name'))
     description = forms.CharField(widget=forms.Textarea, label=_('Description'))
     status = forms.ModelChoiceField(queryset=Status.objects.all(), label=_('Status'))
-    # executor = forms.ModelChoiceField(queryset=get_user_model().objects.all(), label=_('Executor'))
     executor = forms.ModelChoiceField(queryset=User.objects.all(), label=_('Executor'))
     label = forms.ModelChoiceField(queryset=labels.objects.all(), required=False, label=_('Labels'))
 
