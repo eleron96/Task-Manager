@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-21 21:14+0000\n"
+"POT-Creation-Date: 2023-07-21 22:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,7 +125,7 @@ msgstr "Удаление метки"
 #: task_manager/templates/labels/confirm_delete.html:8
 #: task_manager/templates/status/confirm_delete.html:8
 #: task_manager/templates/tasks/confirm_delete.html:8
-#: task_manager/templates/users/confirm_delete.html:5
+#: task_manager/templates/users/confirm_delete.html:6
 msgid "Are you sure you want to delete"
 msgstr "Вы уверены, что хотите удалить"
 
@@ -243,15 +243,15 @@ msgstr "Только свои задачи"
 msgid "Show"
 msgstr "Показать"
 
-#: task_manager/templates/users/confirm_delete.html:4
+#: task_manager/templates/users/confirm_delete.html:5
 msgid "Delete User"
 msgstr "Удаление пользователя"
 
-#: task_manager/templates/users/confirm_delete.html:8
+#: task_manager/templates/users/confirm_delete.html:9
 msgid "Yes, delete"
 msgstr "Да, удалить"
 
-#: task_manager/templates/users/confirm_delete.html:9
+#: task_manager/templates/users/confirm_delete.html:10
 msgid "No, go back"
 msgstr "Отмена"
 

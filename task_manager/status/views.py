@@ -30,12 +30,13 @@ def create_status(request):
 def edit_status(request, status_id):
     status = Status.objects.get(pk=status_id)
     if request.method == 'POST':
-        # Обновляем статус
-        status.name = request.POST['name']
-        status.save()
-        return redirect('status_task')
-
-    return render(request, 'edit_status.html', {'status': status})
+        form = StatusForm(request.POST, instance=status)
+        if form.is_valid():
+            form.save()
+            return redirect('status_task')
+    else:
+        form = StatusForm(instance=status)
+    return render(request, 'edit_status.html', {'form': form})
 
 
 @login_required
