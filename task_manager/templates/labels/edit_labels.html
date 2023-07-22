@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load bootstrap4 %}
 {% block title %}{% trans "Edit Label" %}{% endblock %}
 
 {% block content %}
 <h2>{% trans "Edit Label" %}</h2>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% bootstrap_form form %}
+<!--    {{ form.as_p }}-->
     <button type="submit" class="btn btn-primary">{% trans "Edit" %}</button>
 </form>
 {% endblock %}
