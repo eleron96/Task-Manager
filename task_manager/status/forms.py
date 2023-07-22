@@ -6,11 +6,7 @@ from .models import Status
 class StatusForm(forms.ModelForm):
     class Meta:
         model = Status
-        fields = ('name',)
-        labels = {
-            'name': _('Name'),
-        }
+        fields = ['name']
         widgets = {
-            'name': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'Имя'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите текст', 'id': 'id_text'}),
         }
