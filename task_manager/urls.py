@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+import task_manager
 from task_manager.status.views import status_task, create_status, edit_status, \
     delete_status
 from task_manager.labels.views import label, create_label, edit_label, \
@@ -47,4 +48,5 @@ urlpatterns = [
     path('tasks/create/', create_tasks, name='create_tasks'),
     path('tasks/<int:task_id>/update/', edit_tasks, name='edit_tasks'),
     path('tasks/<int:task_id>/delete/', delete_tasks, name='delete_tasks'),
+    path('tasks/<int:pk>/', task_manager.tasks.views.TaskDetailsView.as_view(), name='tasks_details'),
 ]

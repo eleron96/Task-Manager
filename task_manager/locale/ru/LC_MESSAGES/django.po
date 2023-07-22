@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-22 14:07+0000\n"
+"POT-Creation-Date: 2023-07-22 19:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: task_manager/labels/models.py:6 task_manager/status/models.py:6
-#: task_manager/tasks/forms.py:11 task_manager/tasks/models.py:10
+#: task_manager/tasks/forms.py:14 task_manager/tasks/models.py:10
 #: task_manager/templates/labels/create_labels.html:14
 #: task_manager/templates/labels/label.html:16
 #: task_manager/templates/status/status_task.html:16
@@ -29,29 +29,37 @@ msgstr ""
 msgid "Name"
 msgstr "Имя"
 
-#: task_manager/tasks/forms.py:12 task_manager/tasks/models.py:11
+#: task_manager/mixins.py:21
+msgid "You are not logged in! Please log in."
+msgstr ""
+
+#: task_manager/tasks/forms.py:15 task_manager/tasks/models.py:11
 msgid "Description"
 msgstr "Описание"
 
-#: task_manager/tasks/forms.py:13 task_manager/tasks/models.py:12
+#: task_manager/tasks/forms.py:16 task_manager/tasks/models.py:12
+#: task_manager/templates/tasks/details.html:29
 #: task_manager/templates/tasks/tasks.html:15
 #: task_manager/templates/tasks/tasks.html:63
 msgid "Status"
 msgstr "Статус"
 
-#: task_manager/tasks/forms.py:14 task_manager/tasks/models.py:14
+#: task_manager/tasks/forms.py:17 task_manager/tasks/models.py:14
+#: task_manager/templates/tasks/details.html:25
 #: task_manager/templates/tasks/tasks.html:27
 #: task_manager/templates/tasks/tasks.html:65
 msgid "Executor"
 msgstr "Исполнитель"
 
-#: task_manager/tasks/forms.py:15 task_manager/templates/header.html:17
+#: task_manager/tasks/forms.py:18 task_manager/templates/header.html:17
 #: task_manager/templates/labels/label.html:3
 #: task_manager/templates/labels/label.html:6
+#: task_manager/templates/tasks/details.html:38
 msgid "Labels"
 msgstr "Метки"
 
-#: task_manager/tasks/models.py:13 task_manager/templates/tasks/tasks.html:64
+#: task_manager/tasks/models.py:13 task_manager/templates/tasks/details.html:21
+#: task_manager/templates/tasks/tasks.html:64
 msgid "Author"
 msgstr "Автор"
 
@@ -59,7 +67,12 @@ msgstr "Автор"
 msgid "Label"
 msgstr "Метка"
 
+#: task_manager/tasks/views.py:109
+msgid "Task details"
+msgstr "Просмотр задачи"
+
 #: task_manager/templates/header.html:3 task_manager/templates/home.html:6
+#: task_manager/templates/tasks/details.html:7
 msgid "Task Manager"
 msgstr "Менеджер задач"
 
@@ -163,6 +176,7 @@ msgstr "Изменение метки"
 #: task_manager/templates/labels/label.html:28
 #: task_manager/templates/status/edit_status.html:12
 #: task_manager/templates/status/status_task.html:28
+#: task_manager/templates/tasks/details.html:48
 #: task_manager/templates/tasks/edit_tasks.html:10
 #: task_manager/templates/tasks/tasks.html:80
 #: task_manager/templates/users/edit_user.html:12
@@ -191,6 +205,7 @@ msgstr "Дата создания"
 
 #: task_manager/templates/labels/label.html:30
 #: task_manager/templates/status/status_task.html:30
+#: task_manager/templates/tasks/details.html:50
 #: task_manager/templates/tasks/tasks.html:82
 #: task_manager/templates/users/user_list.html:10
 #: task_manager/templates/users/users.html:28
@@ -223,6 +238,10 @@ msgstr "Удаление задачи"
 #: task_manager/templates/tasks/tasks.html:9
 msgid "Create Task"
 msgstr "Создать задачу"
+
+#: task_manager/templates/tasks/details.html:33
+msgid "Created at"
+msgstr "Дата создания"
 
 #: task_manager/templates/tasks/edit_tasks.html:3
 #: task_manager/templates/tasks/edit_tasks.html:6
@@ -281,6 +300,9 @@ msgstr "Полное имя"
 msgid "No users found"
 msgstr "Пользователь не найден"
 
+#~ msgid "Update"
+#~ msgstr "дата"
+
 #~ msgid "Text"
 #~ msgstr "Текст"
 
@@ -296,9 +318,6 @@ msgstr "Пользователь не найден"
 #~| msgid "Creation date"
 #~ msgid "Creation Date"
 #~ msgstr "Дата создания"
-
-#~ msgid "Update"
-#~ msgstr "дата"
 
 #~ msgid "date"
 #~ msgstr "дата"

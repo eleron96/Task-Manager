@@ -12,7 +12,12 @@ class Task(models.Model):
     status = models.ForeignKey(Status, on_delete=models.CASCADE, verbose_name=_('Status'))  # Link to the Status model
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author_tasks', verbose_name=_('Author'))  # Link to the User model
     executor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='executor_tasks', verbose_name=_('Executor'))  # Link to the User model
-    label = models.ForeignKey(labels, on_delete=models.CASCADE, null=True, verbose_name=_('Label'))  # Link to the Label model
+    labels = models.ManyToManyField(
+        labels,
+        verbose_name=_('Labels'),
+        through='TaskLabel',
+        blank=True,  # используйте только blank=True, не используйте null=True для ManyToManyField
+    )
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -20,3 +25,10 @@ class Task(models.Model):
 
     class Meta:
         app_label = 'tasks'
+
+
+class TaskLabel(models.Model):
+    """Link model for ManyToMany relation between Task and Label models."""
+
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    label = models.ForeignKey(labels, on_delete=models.PROTECT)  # Используйте Label, а не labels

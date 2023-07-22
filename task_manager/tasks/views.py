@@ -1,29 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.views.generic import DetailView
+from django.utils.translation import gettext_lazy as _
 
+from task_manager.mixins import AuthorDeletionMixin, AuthRequiredMixin
 from task_manager.status.models import Status
-from task_manager.tasks.models import Task as TaskModel
+from task_manager.tasks.models import Task as TaskModel, Task
 from task_manager.tasks.forms import TaskForm, TaskFilterForm
+from task_manager.labels.models import labels
+
 from django.contrib import messages
-
-
-# @login_required
-# def create_tasks(request):
-#     if request.method == 'POST':
-#         form = TaskForm(request.POST)
-#         if form.is_valid():
-#             task = form.save(
-#                 commit=True)  # Save the form, but don't commit to the database yet
-#             task.author = request.user  # Set the author to the currently logged-in user
-#             task.status = form.cleaned_data['status']
-#             task.executor = form.cleaned_data['executor']
-#             task.label = form.cleaned_data['label']
-#             task.save()  # Now commit to the database
-#             messages.success(request, 'Задача успешно создана!')
-#             return redirect('tasks')
-#     else:
-#         form = TaskForm()
-#     return render(request, 'tasks/create_tasks.html', {'form': form})
 
 @login_required
 def create_tasks(request):
@@ -110,3 +96,18 @@ def tasks_list(request):
     context = {'form': form, 'tasks': tasks,
                'task_statuses': statuses}
     return render(request, 'tasks/tasks.html', context)
+
+class TaskDetailsView(AuthRequiredMixin, DetailView):
+    """
+    Show task details.
+
+    Authorization required.
+    """
+
+    template_name = 'tasks/details.html'
+    model = Task
+    context_object_name = 'task'
+    extra_context = {
+        'title': _('Task details'),
+    }
+
