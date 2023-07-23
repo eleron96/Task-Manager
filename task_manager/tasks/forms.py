@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
 from task_manager.status.models import Status
-from task_manager.labels.models import labels
+from task_manager.labels.models import Labels
 from task_manager.users.models import User
 from .models import Task
 
@@ -15,7 +15,7 @@ class TaskForm(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea, label=_('Description'))
     status = forms.ModelChoiceField(queryset=Status.objects.all(), label=_('Status'))
     executor = forms.ModelChoiceField(queryset=User.objects.all(), label=_('Executor'))
-    label = forms.ModelChoiceField(queryset=labels.objects.all(), required=False, label=_('Labels'))
+    label = forms.ModelChoiceField(queryset=Labels.objects.all(), required=False, label=_('Labels'))
 
 
     class Meta:
@@ -32,6 +32,6 @@ class TaskForm(forms.ModelForm):
 class TaskFilterForm(forms.Form):
     status = forms.ModelChoiceField(queryset=Status.objects.all(), required=False)
     executor = forms.ModelChoiceField(queryset=User.objects.all(), required=False)
-    label = forms.ModelChoiceField(queryset=labels.objects.all(), required=False)
+    label = forms.ModelChoiceField(queryset=Labels.objects.all(), required=False)
     my_tasks = forms.BooleanField(required=False)
 

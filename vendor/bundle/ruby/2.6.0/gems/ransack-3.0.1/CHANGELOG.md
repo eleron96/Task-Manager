@@ -908,7 +908,7 @@
 
 ### Fixed
 
-*   Fix a regression where form labels for attributes through a `belongs_to`
+*   Fix a regression where form Labels for attributes through a `belongs_to`
     association without a translation for the attribute in the locales file
     would cause a "no implicit conversion of nil into Hash" crash instead of
     falling back on the attribute name. Added test coverage.

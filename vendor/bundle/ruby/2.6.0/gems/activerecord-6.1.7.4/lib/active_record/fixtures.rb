@@ -267,7 +267,7 @@ module ActiveRecord
   #
   # Add a few more monkeys and pirates and break this into multiple files,
   # and it gets pretty hard to keep track of what's going on. Let's
-  # use labels instead of IDs:
+  # use Labels instead of IDs:
   #
   #   ### in pirates.yml
   #

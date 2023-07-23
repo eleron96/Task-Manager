@@ -20,7 +20,7 @@ from django.urls import path, include
 import task_manager
 from task_manager.status.views import status_task, create_status, edit_status, \
     delete_status
-from task_manager.labels.views import label, create_label, edit_label, \
+from task_manager.labels.views import gey_all_labels, create_label, edit_label, \
     delete_label
 from task_manager import views
 from .views import index
@@ -40,10 +40,10 @@ urlpatterns = [
     path('statuses/<int:status_id>/update/', edit_status, name='edit_status'),
     path('statuses/<int:status_id>/delete/', delete_status,
          name='delete_status'),
-    path('labels/', label, name='label'),
-    path('labels/create/', create_label, name='create_label'),
-    path('labels/<int:status_id>/update/', edit_label, name='edit_label'),
-    path('labels/<int:label_id>/delete/', delete_label, name='delete_label'),
+    path('Labels/', gey_all_labels, name='label'),
+    path('Labels/create/', create_label, name='create_label'),
+    path('Labels/<int:status_id>/update/', edit_label, name='edit_label'),
+    path('Labels/<int:label_id>/delete/', delete_label, name='delete_label'),
     path('tasks/', tasks_list, name='tasks'),
     path('tasks/create/', create_tasks, name='create_tasks'),
     path('tasks/<int:task_id>/update/', edit_tasks, name='edit_tasks'),
