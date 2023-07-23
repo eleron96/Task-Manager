@@ -27,4 +27,4 @@ class TaskLabel(models.Model):
     """Link model for ManyToMany relation between Task and Label models."""
 
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    label = models.ForeignKey(Labels, on_delete=models.PROTECT)  # Используйте Label, а не Labels
+    label = models.ForeignKey(Labels, on_delete=models.PROTECT)

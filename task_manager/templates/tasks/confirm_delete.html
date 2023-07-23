@@ -5,11 +5,11 @@
 {% block content %}
   <h2>{% trans "Delete task" %}</h2>
 
-  <p>{% trans "Are you sure you want to delete" %} "{{ tasks.name }}"?</p>
+  <p>{% trans "Are you sure you want to delete" %} "{{ task.name }}"?</p>
 
   <form method="post">
     {% csrf_token %}
     <input type="submit" value="{% trans 'Confirm' %}" class="btn btn-danger">
-    <a href="{% url 'status_task' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
+    <a href="{% url 'tasks' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
   </form>
 {% endblock %}

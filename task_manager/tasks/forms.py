@@ -15,7 +15,13 @@ class TaskForm(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea, label=_('Description'))
     status = forms.ModelChoiceField(queryset=Status.objects.all(), label=_('Status'))
     executor = forms.ModelChoiceField(queryset=User.objects.all(), label=_('Executor'))
-    label = forms.ModelChoiceField(queryset=Labels.objects.all(), required=False, label=_('Labels'))
+    # label = forms.ModelChoiceField(queryset=Labels.objects.all(), required=False, label=_('Labels'))
+    label = forms.ModelMultipleChoiceField(
+        queryset=Labels.objects.all(),
+        required=False,
+        widget=forms.SelectMultiple,
+        label=_('Labels')
+    )
 
 
     class Meta:

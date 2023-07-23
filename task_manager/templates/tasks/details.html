@@ -37,8 +37,10 @@
             <div class="col">
                 <h6>{% translate 'Labels' %}</h6>
                 <ul>
-                    {% for label in task.label.all %}
+                    {% for label in form.label.all %}
                     <li>{{ label.name }}</li>
+                    {% empty %}
+                    <li>No labels</li>
                     {% endfor %}
                 </ul>
             </div>

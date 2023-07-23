@@ -88,7 +88,7 @@ def tasks_list(request):
         if form.cleaned_data['executor']:
             tasks = tasks.filter(executor=form.cleaned_data['executor'].id)
         if form.cleaned_data['label']:
-            tasks = tasks.filter(label=form.cleaned_data['label'].id)
+            tasks = tasks.filter(labels=form.cleaned_data['label'].id)
         if form.cleaned_data['my_tasks']:  # Check if 'my_tasks' is checked
             tasks = tasks.filter(
                 author=request.user)
