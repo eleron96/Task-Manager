@@ -9,7 +9,7 @@ from task_manager.tasks.models import Task, TaskLabel
 @login_required
 def gey_all_labels(request):
     label = Labels.objects.all()
-    return render(request, 'Labels/label.html', {'Labels': label})
+    return render(request, 'labels/label.html', {'Labels': label})
 
 
 @login_required
@@ -23,7 +23,7 @@ def create_label(request):
     else:
         form = labelsForm()
 
-    return render(request, 'Labels/create_labels.html', {'form': form})
+    return render(request, 'labels/create_labels.html', {'form': form})
 @login_required
 def edit_label(request, status_id):
     status = Labels.objects.get(pk=status_id)
@@ -38,14 +38,14 @@ def edit_label(request, status_id):
 def delete_label(request, label_id):  # использовать label_id вместо status_id
     label = get_object_or_404(Labels, id=label_id)
     if request.method == 'POST':
-        if not TaskLabel.objects.filter(label_id=label_id).exists():
+        if not label.Tasks.exists():  # использовать label.Tasks.exists() вместо label.task_set.exists()
             label.delete()
             messages.success(request, 'Метка успешно удалена')
         else:
             messages.error(request, 'Метка не может быть удалена, так как она используется в задаче.')
         return redirect('label')
 
-    return render(request, 'Labels/confirm_delete.html', {'status': label})
+    return render(request, 'labels/confirm_delete.html', {'status': label})
 
 
 @login_required
@@ -59,4 +59,4 @@ def edit_label(request, status_id):
             return redirect('label')
     else:
         form = labelsForm(instance=status)
-    return render(request, 'Labels/edit_labels.html', {'form': form})
+    return render(request, 'labels/edit_labels.html', {'form': form})
