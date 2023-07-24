@@ -1,5 +1,4 @@
 from django import forms
-from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
 from task_manager.status.models import Status
@@ -10,7 +9,8 @@ from .models import Task
 
 class TaskForm(forms.ModelForm):
     name = forms.CharField(max_length=100, label=_('Name'))
-    description = forms.CharField(widget=forms.Textarea, label=_('Description'))
+    description = forms.CharField(widget=forms.Textarea,
+                                  label=_('Description'))
     status = forms.ModelChoiceField(queryset=Status.objects.all(),
                                     label=_('Status'))
     executor = forms.ModelChoiceField(queryset=User.objects.all(),

@@ -10,6 +10,8 @@ translate:
 	@poetry run python manage.py makemessages -l ru
 	@poetry run python manage.py compilemessages
 
+lint:
+	@poetry run flake8 task_manager
 
 test:
 	poetry run coverage run --source=app,labels,status,task_manager,tasks -m pytest

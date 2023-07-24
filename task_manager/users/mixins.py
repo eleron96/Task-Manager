@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import redirect
 
+
 class UserPermissionMixin:
     permission_message = ''
     permission_url = ''

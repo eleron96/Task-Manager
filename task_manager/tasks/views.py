@@ -3,21 +3,24 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
 from django.utils.translation import gettext_lazy as _
 
-from task_manager.mixins import AuthorDeletionMixin, AuthRequiredMixin
+from task_manager.mixins import AuthRequiredMixin
 from task_manager.status.models import Status
 from task_manager.tasks.models import Task as TaskModel, Task
 from task_manager.tasks.forms import TaskForm, TaskFilterForm
 
 from django.contrib import messages
 
+
 @login_required
 def create_tasks(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
-            # Мы непосредственно сохраняем форму, прежде чем сделать какие-либо изменения
+            # Мы непосредственно сохраняем форму, прежде чем сделать
+            # какие-либо изменения
             task = form.save(commit=False)
-            task.author = request.user  # Задаем автора как текущего пользователя
+            task.author = request.user  # Задаем автора как текущего
+            # пользователя
             task.save()  # Сохраняем изменения
             form.save_m2m()  # Сохраняем многие ко многим поля
             messages.success(request, 'Задача успешно создана!')
@@ -45,7 +48,8 @@ def delete_tasks(request, task_id):
 
     # Check if the logged-in user is the author of the task
     if task.author != request.user:
-        messages.error(request, "У вас нет прав для редактирования этой задачи")
+        messages.error(request, "У вас нет прав "
+                                "для редактирования этой задачи")
         return redirect('tasks')
 
     if request.method == 'POST':
@@ -62,7 +66,8 @@ def edit_tasks(request, task_id):
 
     # Check if the logged-in user is the author of the task
     if task.author != request.user:
-        messages.error(request, "У вас нет прав для редактирования этой задачи")
+        messages.error(request, "У вас нет прав "
+                                "для редактирования этой задачи")
         return redirect('tasks')
 
     if request.method == 'POST':
@@ -98,6 +103,7 @@ def tasks_list(request):
                'task_statuses': statuses}
     return render(request, 'tasks/tasks.html', context)
 
+
 class TaskDetailsView(AuthRequiredMixin, DetailView):
     """
     Show task details.
@@ -111,4 +117,3 @@ class TaskDetailsView(AuthRequiredMixin, DetailView):
     extra_context = {
         'title': _('Task details'),
     }
-

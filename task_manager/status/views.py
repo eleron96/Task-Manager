@@ -44,12 +44,13 @@ def delete_status(request, status_id):
     status = get_object_or_404(Status, id=status_id)
     if request.method == 'POST':
         if not Task.objects.filter(
-                status=status).exists():  # Проверяем, используется ли статус в задачах
+                status=status).exists():
             status.delete()
             messages.success(request, 'Статус успешно удален!')
         else:
             messages.error(request,
-                           'Статус не может быть удалён, так как он используется в задаче.')
+                           'Статус не может быть удалён, '
+                           'так как он используется в задаче.')
         return redirect('status_task')
 
     return render(request, 'status/confirm_delete.html', {'status': status})

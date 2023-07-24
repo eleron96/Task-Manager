@@ -17,6 +17,7 @@ def home(request):
     users = get_user_model().objects.all()
     return render(request, 'home.html', {'users': users})
 
+
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
@@ -68,10 +69,10 @@ def delete_user(request, pk):
     else:
         return render(request, 'users/confirm_delete.html', {'user': user})
 
+
 class UserEditView(UpdateView, SuccessMessageMixin):
     model = get_user_model()
     template_name = 'users/edit_user.html'
     form_class = UserEditForm
     success_url = '/users/'
     success_message = 'Пользователь успешно изменен'
-

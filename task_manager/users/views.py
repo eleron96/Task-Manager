@@ -1,8 +1,7 @@
 from django.contrib.auth import get_user_model
-from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
 from task_manager.users.forms import UserEditForm, CreateUserForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -10,6 +9,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.edit import UpdateView
 
 from task_manager.users.mixins import UserPermissionMixin
+
+
 # Create your views here.
 
 def user_list(request):
@@ -29,7 +30,8 @@ def create_user(request):
     return render(request, 'users/create_user.html', {'form': form})
 
 
-class UserUpdateFormView(SuccessMessageMixin, LoginRequiredMixin, UserPermissionMixin, UpdateView):
+class UserUpdateFormView(SuccessMessageMixin, LoginRequiredMixin,
+                         UserPermissionMixin, UpdateView):
     """
     Update user.
 
@@ -51,7 +53,6 @@ class UserUpdateFormView(SuccessMessageMixin, LoginRequiredMixin, UserPermission
         return context
 
 
-
 @login_required
 def delete_user(request, pk):
     user = get_user_model().objects.get(pk=pk)
@@ -66,10 +67,10 @@ def delete_user(request, pk):
     else:
         return render(request, 'users/confirm_delete.html', {'user': user})
 
+
 class UserEditView(UpdateView, SuccessMessageMixin):
     model = get_user_model()
     template_name = 'users/edit_user.html'
     form_class = UserEditForm
     success_url = '/users/'
     success_message = 'Пользователь успешно изменен'
-
