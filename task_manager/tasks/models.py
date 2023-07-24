@@ -12,7 +12,7 @@ class Task(models.Model):
     status = models.ForeignKey(Status, on_delete=models.CASCADE, verbose_name=_('Status'))  # Link to the Status model
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author_tasks', verbose_name=_('Author'))  # Link to the User model
     executor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='executor_tasks', verbose_name=_('Executor'))  # Link to the User model
-    labels = models.ManyToManyField(Labels, verbose_name=_('Labels'), through='TaskLabel', related_name='Tasks')  # Link to the Label model
+    labels = models.ManyToManyField(Labels, verbose_name=_('Labels'), through='TaskLabel', related_name='Tasks', blank=True)  # Link to the Label model
 
     created_date = models.DateTimeField(auto_now_add=True)
 
