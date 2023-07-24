@@ -18,7 +18,7 @@ def home(request):
     return render(request, 'home.html', {'users': users})
 
 
-def login_view(request):
+def login_view(request):  # noqa: C901
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
