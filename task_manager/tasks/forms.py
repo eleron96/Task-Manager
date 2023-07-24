@@ -11,21 +11,21 @@ from .models import Task
 
 
 class TaskForm(forms.ModelForm):
-    # name = forms.CharField(max_length=100, label=_('Name'))
-    # description = forms.CharField(widget=forms.Textarea, label=_('Description'))
-    # status = forms.ModelChoiceField(queryset=Status.objects.all(), label=_('Status'))
-    # executor = forms.ModelChoiceField(queryset=User.objects.all(), label=_('Executor'))
-    # label = forms.ModelMultipleChoiceField(
-    #     queryset=Labels.objects.all(),
-    #     required=True,
-    #     widget=forms.SelectMultiple,
-    #     label=_('Labels')
-    # )
+    name = forms.CharField(max_length=100, label=_('Name'))
+    description = forms.CharField(widget=forms.Textarea, label=_('Description'))
+    status = forms.ModelChoiceField(queryset=Status.objects.all(), label=_('Status'))
+    executor = forms.ModelChoiceField(queryset=User.objects.all(), label=_('Executor'))
+    label = forms.ModelMultipleChoiceField(
+        queryset=Labels.objects.all(),
+        required=False,
+        widget=forms.SelectMultiple,
+        label=_('Labels')
+    )
 
 
     class Meta:
         model = Task
-        fields = ['name', 'description', 'status', 'executor', 'labels']
+        fields = ['name', 'description', 'status', 'executor', 'label']
 
 
     def clean_status(self):
