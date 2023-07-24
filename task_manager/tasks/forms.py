@@ -15,17 +15,17 @@ class TaskForm(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea, label=_('Description'))
     status = forms.ModelChoiceField(queryset=Status.objects.all(), label=_('Status'))
     executor = forms.ModelChoiceField(queryset=User.objects.all(), label=_('Executor'))
-    label = forms.ModelMultipleChoiceField(
-        queryset=Labels.objects.all(),
-        required=False,
-        widget=forms.SelectMultiple,
-        label=_('Labels')
-    )
+    # label = forms.ModelMultipleChoiceField(
+    #     queryset=Labels.objects.all(),
+    #     required=False,
+    #     widget=forms.SelectMultiple,
+    #     label=_('Labels')
+    # )
 
 
     class Meta:
         model = Task
-        fields = ['name', 'description', 'status', 'executor', 'label']
+        fields = ['name', 'description', 'status', 'executor', 'labels']
 
 
     def clean_status(self):
