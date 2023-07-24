@@ -19,6 +19,7 @@ def create_tasks(request):
             task = form.save(commit=False)
             task.author = request.user  # Задаем автора как текущего пользователя
             task.save()  # Сохраняем изменения
+            form.save_m2m()  # Сохраняем многие ко многим поля
             messages.success(request, 'Задача успешно создана!')
             return redirect('tasks')
     else:
@@ -88,7 +89,8 @@ def tasks_list(request):
         if form.cleaned_data['executor']:
             tasks = tasks.filter(executor=form.cleaned_data['executor'].id)
         if form.cleaned_data['label']:
-            tasks = tasks.filter(labels=form.cleaned_data['label'].id)
+            tasks = tasks.filter(labels__pk=form.cleaned_data['label'].id)
+            # tasks = tasks.filter(labels=form.cleaned_data['label'].id)
         if form.cleaned_data['my_tasks']:  # Check if 'my_tasks' is checked
             tasks = tasks.filter(
                 author=request.user)
