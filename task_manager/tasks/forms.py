@@ -19,7 +19,7 @@ class TaskForm(forms.ModelForm):
         queryset=Labels.objects.all(),
         required=False,
         widget=forms.SelectMultiple,
-        label=_('Label')
+        label=_('Labels')
     )
 
 
