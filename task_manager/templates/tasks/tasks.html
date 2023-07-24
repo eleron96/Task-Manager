@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load bootstrap4 %}
 {% block title %}{% trans "Tasks" %}{% endblock %}
 
 {% block content %}
@@ -11,43 +12,48 @@
 
   <div class="card mb-3 card-body bg-light">
     <form method="GET" class="d-flex flex-row align-items-center justify-content-between flex-wrap">
-      <div class="p-2">
-        <label class="form-label" for="id_status">{% trans "Status" %}</label>
-        <select name="status" class="form-select rounded" id="id_status">
-          <option value="" selected>---------</option>
-          {% for status in task_statuses %}
-            <option value="{{ status.id }}">{{ status.name }}</option>
-          {% empty %}
-            <option>{% trans "No Data" %}</option>
-          {% endfor %}
-        </select>
-      </div>
+      {% bootstrap_field form.label %}
+        {% bootstrap_field form.status %}
+        {% bootstrap_field form.executor %}
+        {% bootstrap_field form.my_tasks %}
 
-      <div class="p-2">
-        <label class="form-label" for="id_executor">{% trans "Executor" %}</label>
-        <select name="executor" class="form-select rounded" id="id_executor">
-          <option value="" selected>---------</option>
-          {% for user in form.executor.field.queryset %}
-            <option value="{{ user.id }}">{{ user.username }}</option>
-          {% endfor %}
-        </select>
-      </div>
+<!--      <div class="p-2">-->
+<!--        <label class="form-label" for="id_status">{% trans "Status" %}</label>-->
+<!--        <select name="status" class="form-select rounded" id="id_status">-->
+<!--          <option value="" selected>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>-->
+<!--          {% for status in task_statuses %}-->
+<!--            <option value="{{ status.id }}">{{ status.name }}</option>-->
+<!--          {% empty %}-->
+<!--            <option>{% trans "No Data" %}</option>-->
+<!--          {% endfor %}-->
+<!--        </select>-->
+<!--      </div>-->
 
-      <div class="p-2">
-        <label class="form-label" for="id_label">{% trans "Label" %}</label>
-        <select name="label" class="form-select rounded" id="id_label">
-          <option value="" selected>---------</option>
-          {% for label in form.label.field.queryset %}
-            <option value="{{ label.id }}">{{ label.name }}</option>
-          {% endfor %}
-        </select>
-      </div>
+<!--      <div class="p-2">-->
+<!--        <label class="form-label" for="id_executor">{% trans "Executor" %}</label>-->
+<!--        <select name="executor" class="form-select rounded" id="id_executor">-->
+<!--          <option value="" selected>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>-->
+<!--          {% for user in form.executor.field.queryset %}-->
+<!--            <option value="{{ user.id }}">{{ user.username }}</option>-->
+<!--          {% endfor %}-->
+<!--        </select>-->
+<!--      </div>-->
 
-      <div class="p-2 form-check">
-        {{ filter.form.as_p }}
-        <input type="checkbox" id="my_tasks" name="my_tasks">
-        <label for="my_tasks">{% trans "Only my tasks" %}</label>
-      </div>
+<!--      <div class="p-2">-->
+<!--        <label class="form-label" for="id_label">{% trans "Label" %}</label>-->
+<!--        <select name="label" class="form-select rounded" id="id_label">-->
+<!--          <option value="" selected>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>-->
+<!--          {% for label in form.label.field.queryset %}-->
+<!--            <option value="{{ label.id }}">{{ label.name }}</option>-->
+<!--          {% endfor %}-->
+<!--        </select>-->
+<!--      </div>-->
+
+<!--      <div class="p-2 form-check">-->
+<!--        {{ filter.form.as_p }}-->
+<!--        <input type="checkbox" id="my_tasks" name="my_tasks">-->
+<!--        <label for="my_tasks">{% trans "Only my tasks" %}</label>-->
+<!--      </div>-->
 
       <div class="p-2">
         <input class="btn btn-primary btn-sm" type="submit" value="{% trans 'Show' %}">

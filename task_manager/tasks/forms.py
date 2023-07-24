@@ -11,21 +11,21 @@ from .models import Task
 
 
 class TaskForm(forms.ModelForm):
-    # name = forms.CharField(max_length=100, label=_('Name'))
-    # description = forms.CharField(widget=forms.Textarea, label=_('Description'))
-    # status = forms.ModelChoiceField(queryset=Status.objects.all(), label=_('Status'))
-    # executor = forms.ModelChoiceField(queryset=User.objects.all(), label=_('Executor'))
-    # label = forms.ModelMultipleChoiceField(
-    #     queryset=Labels.objects.all(),
-    #     required=False,
-    #     widget=forms.SelectMultiple,
-    #     label=_('Labels')
-    # )
+    name = forms.CharField(max_length=100, label=_('Name'))
+    description = forms.CharField(widget=forms.Textarea, label=_('Description'))
+    status = forms.ModelChoiceField(queryset=Status.objects.all(), label=_('Status'))
+    executor = forms.ModelChoiceField(queryset=User.objects.all(), label=_('Executor'))
+    label = forms.ModelMultipleChoiceField(
+        queryset=Labels.objects.all(),
+        required=False,
+        widget=forms.SelectMultiple,
+        label=_('Label')
+    )
 
 
     class Meta:
         model = Task
-        fields = ['name', 'description', 'status', 'executor', 'labels']
+        fields = ['name', 'description', 'status', 'executor', 'label']
 
 
     def clean_status(self):
@@ -36,8 +36,8 @@ class TaskForm(forms.ModelForm):
 
 
 class TaskFilterForm(forms.Form):
-    status = forms.ModelChoiceField(queryset=Status.objects.all(), required=False)
-    executor = forms.ModelChoiceField(queryset=User.objects.all(), required=False)
-    label = forms.ModelChoiceField(queryset=Labels.objects.all(), required=False)
-    my_tasks = forms.BooleanField(required=False)
+    status = forms.ModelChoiceField(queryset=Status.objects.all(), required=False, label=_('Status'))
+    executor = forms.ModelChoiceField(queryset=User.objects.all(), required=False, label=_('Executor'))
+    label = forms.ModelChoiceField(queryset=Labels.objects.all(), required=False,  label=_('Label'))
+    my_tasks = forms.BooleanField(required=False, label=_('My tasks'))
 
